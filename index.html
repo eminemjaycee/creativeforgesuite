@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Creative Forge Suite — Tools for Filmmakers & Creators</title>
+<meta name="description" content="Professional tools for independent filmmakers and creators. Screenplay to webtoon panels, film budget top sheets, entertainment legal contracts. $1–$5, no subscription.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#ffffff;
+  --surface:#f8f8f8;
+  --border:#e8e8e8;
+  --text:#1a1a1a;
+  --muted:#6b6b6b;
+  --accent:#1a1a1a;
+  --accent-hover:#444;
+  --radius:12px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,-apple-system,sans-serif;font-size:16px;line-height:1.65}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 48px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.logo{font-weight:800;font-size:1.1rem;color:var(--text);text-decoration:none;letter-spacing:-.03em}
+nav ul{list-style:none;display:flex;gap:28px;align-items:center}
+nav a{color:var(--muted);text-decoration:none;font-size:.875rem;font-weight:500;transition:color .2s}
+nav a:hover{color:var(--text)}
+.nav-cta{background:var(--text);color:#fff!important;padding:8px 20px;border-radius:8px;font-weight:600;transition:background .2s}
+.nav-cta:hover{background:var(--accent-hover);color:#fff!important}
+
+/* HERO */
+.hero{min-height:90vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:140px 24px 100px;max-width:800px;margin:0 auto}
+h1{font-weight:800;font-size:clamp(2.8rem,6vw,4.5rem);line-height:1.08;letter-spacing:-.04em;margin-bottom:24px;color:var(--text)}
+.hero-sub{font-size:1.1rem;color:var(--muted);max-width:520px;margin:0 auto 40px;line-height:1.7;font-weight:400}
+.hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:64px}
+.btn{padding:14px 28px;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;border:none;cursor:pointer;display:inline-block;transition:all .2s;font-family:'Inter',sans-serif}
+.btn-primary{background:var(--text);color:#fff}
+.btn-primary:hover{background:var(--accent-hover);transform:translateY(-1px)}
+.btn-secondary{background:transparent;color:var(--text);border:1px solid var(--border)}
+.btn-secondary:hover{border-color:var(--muted)}
+
+.hero-stats{display:flex;gap:48px;justify-content:center;flex-wrap:wrap}
+.stat .n{font-weight:800;font-size:2rem;letter-spacing:-.02em;color:var(--text)}
+.stat .l{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:2px;font-weight:500}
+
+/* DIVIDER */
+.divider{width:80px;height:1px;background:var(--border);margin:0 auto}
+
+/* TOOLS */
+#tools{padding:100px 24px}
+.container{max-width:900px;margin:0 auto}
+.slabel{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:12px}
+h2{font-weight:800;font-size:clamp(1.8rem,3.5vw,2.6rem);letter-spacing:-.03em;line-height:1.1;margin-bottom:12px;color:var(--text)}
+.ssub{color:var(--muted);font-size:1rem;max-width:600px;line-height:1.7;margin-bottom:56px}
+
+.tool-cards{display:flex;flex-direction:column;gap:16px}
+.tool-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:40px;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:start;text-decoration:none;color:var(--text);transition:border-color .2s,box-shadow .2s}
+.tool-card:hover{border-color:#ccc;box-shadow:0 2px 16px rgba(0,0,0,.04)}
+.card-left{display:flex;align-items:flex-start;gap:20px}
+.card-icon{font-size:1.8rem;flex-shrink:0;margin-top:2px}
+.card-num{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;font-weight:600}
+.card-name{font-weight:800;font-size:1.4rem;letter-spacing:-.02em;margin-bottom:8px}
+.card-desc{color:var(--muted);font-size:.9rem;line-height:1.65;max-width:480px;margin-bottom:14px}
+.card-features{display:flex;flex-wrap:wrap;gap:6px}
+.feat{background:var(--bg);border:1px solid var(--border);padding:4px 10px;border-radius:6px;font-size:.7rem;color:var(--muted);font-weight:500}
+.card-right{text-align:right;flex-shrink:0}
+.card-price{font-weight:800;font-size:2.4rem;letter-spacing:-.03em;color:var(--text);line-height:1}
+.card-price-sub{font-size:.72rem;color:var(--muted);margin-top:4px;font-weight:500}
+.card-cta{display:inline-block;margin-top:16px;padding:10px 20px;background:var(--text);color:#fff;border-radius:8px;font-weight:600;font-size:.85rem;text-decoration:none;transition:background .2s}
+.card-cta:hover{background:var(--accent-hover)}
+
+/* WHY */
+#why{padding:100px 24px;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:48px}
+.why-item{padding:28px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius)}
+.why-icon{font-size:1.4rem;margin-bottom:12px}
+.why-item h3{font-weight:700;font-size:.95rem;margin-bottom:6px}
+.why-item p{font-size:.85rem;color:var(--muted);line-height:1.6}
+
+/* PRICING */
+#pricing{padding:100px 24px;text-align:center}
+.pricing-strip{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:44px}
+.price-pill{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px 32px;min-width:200px}
+.price-pill .tool-name{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;font-weight:600}
+.price-pill .amount{font-weight:800;font-size:2.2rem;color:var(--text);letter-spacing:-.03em}
+.price-pill .per{font-size:.78rem;color:var(--muted);margin-top:4px}
+.price-pill.featured{border-color:var(--text)}
+
+/* SOCIAL */
+#social{padding:80px 24px;text-align:center;border-top:1px solid var(--border)}
+.social-links{display:flex;gap:12px;justify-content:center;margin-top:24px;flex-wrap:wrap}
+.social-link{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 20px;text-decoration:none;color:var(--text);font-size:.85rem;font-weight:600;transition:border-color .2s}
+.social-link:hover{border-color:var(--text)}
+.social-link svg{width:16px;height:16px;fill:currentColor}
+
+/* FOOTER */
+footer{padding:48px 24px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;max-width:900px;margin:0 auto}
+.footer-logo{font-weight:800;font-size:1rem;letter-spacing:-.02em}
+footer p{font-size:.75rem;color:var(--muted)}
+.footer-links{display:flex;gap:20px}
+.footer-links a{font-size:.8rem;color:var(--muted);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--text)}
+
+@media(max-width:768px){
+  nav{padding:14px 20px}
+  nav ul{display:none}
+  .hero{padding:120px 20px 80px}
+  h1{font-size:2.4rem}
+  .tool-card{grid-template-columns:1fr;padding:28px 20px}
+  .card-right{text-align:left}
+  .card-left{flex-direction:column;gap:12px}
+  footer{flex-direction:column;text-align:center}
+  .footer-links{justify-content:center}
+  .hero-stats{gap:28px}
+  .pricing-strip{flex-direction:column;align-items:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo">Creative Forge Suite</a>
+  <ul>
+    <li><a href="#tools">Tools</a></li>
+    <li><a href="#why">Why Forge</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#social">Follow</a></li>
+    <li><a href="#tools" class="nav-cta">Browse Tools</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <h1>Build your film.<br>Not your stack.</h1>
+  <p class="hero-sub">Purpose-built tools for screenwriters, filmmakers, and creators. No bloated software. No subscriptions. Pay once, work instantly.</p>
+  <div class="hero-actions">
+    <a href="#tools" class="btn btn-primary">Browse all tools →</a>
+    <a href="https://www.instagram.com/theforgesuite" target="_blank" class="btn btn-secondary">Follow @theforgesuite</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="n">3</div><div class="l">Tools</div></div>
+    <div class="stat"><div class="n">$1–$5</div><div class="l">Per use</div></div>
+    <div class="stat"><div class="n">0</div><div class="l">Subscriptions</div></div>
+    <div class="stat"><div class="n">∞</div><div class="l">Downloads</div></div>
+  </div>
+</section>
+
+<section id="tools">
+  <div class="container">
+    <div class="slabel">The Suite</div>
+    <h2>Three tools. Every production need.</h2>
+    <p class="ssub">Each tool solves one painful, specific problem — and solves it completely.</p>
+
+    <div class="tool-cards">
+
+      <a href="https://www.webtoonforge.com" target="_blank" class="tool-card">
+        <div class="card-left">
+          <div class="card-icon">📖</div>
+          <div>
+            <div class="card-num">Tool 01</div>
+            <div class="card-name">WebtoonForge</div>
+            <div class="card-desc">Converts any screenplay into a fully formatted webtoon panel script. Upload your Fountain, Final Draft (.fdx), or PDF file — every scene becomes a page with complete panel breakdowns, shot types, visual descriptions, dialogue placement, and SFX notes.</div>
+            <div class="card-features">
+              <span class="feat">.fountain</span>
+              <span class="feat">.fdx</span>
+              <span class="feat">.pdf</span>
+              <span class="feat">Panel breakdowns</span>
+              <span class="feat">Shot types</span>
+              <span class="feat">SFX notes</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-right">
+          <div class="card-price">$1</div>
+          <div class="card-price-sub">per conversion</div>
+          <span class="card-cta">Open tool →</span>
+        </div>
+      </a>
+
+      <a href="https://www.topsheetforge.com" target="_blank" class="tool-card">
+        <div class="card-left">
+          <div class="card-icon">📊</div>
+          <div>
+            <div class="card-num">Tool 02</div>
+            <div class="card-name">TopSheetForge</div>
+            <div class="card-desc">Generates a professional ATL/BTL film budget top sheet in 60 seconds. Enter your total budget, project type, genre, shooting days, and union status — calculates all 24 line items using real industry-standard ratios. Print-ready and pitch-deck ready.</div>
+            <div class="card-features">
+              <span class="feat">ATL + BTL breakdown</span>
+              <span class="feat">24 line items</span>
+              <span class="feat">Genre-adjusted</span>
+              <span class="feat">Union/non-union</span>
+              <span class="feat">Print-ready</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-right">
+          <div class="card-price">$1</div>
+          <div class="card-price-sub">per top sheet</div>
+          <span class="card-cta">Open tool →</span>
+        </div>
+      </a>
+
+      <a href="https://www.legalcontractforge.com" target="_blank" class="tool-card">
+        <div class="card-left">
+          <div class="card-icon">⚖️</div>
+          <div>
+            <div class="card-num">Tool 03</div>
+            <div class="card-name">LegalContractForge</div>
+            <div class="card-desc">11 professional entertainment legal templates — option agreements, co-writer deals, actor deal memos, NDAs, work-for-hire, co-production agreements, life rights, and more. Fill in your terms, preview, pay $1, download instantly.</div>
+            <div class="card-features">
+              <span class="feat">Option Agreement</span>
+              <span class="feat">Co-Writer Deal</span>
+              <span class="feat">Actor Deal Memo</span>
+              <span class="feat">NDA</span>
+              <span class="feat">Life Rights</span>
+              <span class="feat">+6 more</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-right">
+          <div class="card-price">$1</div>
+          <div class="card-price-sub">per document</div>
+          <span class="card-cta">Open tool →</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="container">
+    <div class="slabel">Why Forge</div>
+    <h2>Built for creators who actually ship.</h2>
+    <p class="ssub">No accounts. No subscriptions. No waiting.<br><br>The Forge Suite was built by The Ghost Dog Collective, a worldwide crew of indie filmmakers who got tired of hunting for templates and burning money just to start creating and get projects off the ground. The film industry grind is already tough. Your tools shouldn't be. That's why we built Forge Suite. That's why we stand by our $1 mission.</p>
+    <div class="why-grid">
+      <div class="why-item">
+        <div class="why-icon">⚡</div>
+        <h3>Instant output</h3>
+        <p>Every tool generates your document in seconds. No queues, no rendering, no waiting.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">💳</div>
+        <h3>Pay once, keep it</h3>
+        <p>No monthly subscriptions. Pay per use, download once. Your file is yours forever.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">🎯</div>
+        <h3>Industry-standard</h3>
+        <p>Built by filmmakers who know the formats. Real ratios. Real legal language.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">🔒</div>
+        <h3>No account needed</h3>
+        <p>Open the tool. Fill in your details. Pay. Download. Zero friction.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="container">
+    <div class="slabel">Pricing</div>
+    <h2>Simple. No surprises.</h2>
+    <p class="ssub" style="margin:0 auto;text-align:center">Every tool is pay-per-use. No subscriptions. No tiers. No annual plans.</p>
+    <div class="pricing-strip">
+      <div class="price-pill">
+        <div class="tool-name">WebtoonForge</div>
+        <div class="amount">$1</div>
+        <div class="per">per conversion · first free</div>
+      </div>
+      <div class="price-pill featured">
+        <div class="tool-name">TopSheetForge</div>
+        <div class="amount">$1</div>
+        <div class="per">per top sheet · preview free</div>
+      </div>
+      <div class="price-pill">
+        <div class="tool-name">LegalContractForge</div>
+        <div class="amount">$1</div>
+        <div class="per">per document · preview free</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="social">
+  <div class="container">
+    <div class="slabel">Follow along</div>
+    <h2>Stay in the loop.</h2>
+    <p class="ssub" style="margin:0 auto;text-align:center">New tools, tips, and filmmaker resources.</p>
+    <div class="social-links">
+      <a href="https://www.instagram.com/theforgesuite" target="_blank" class="social-link">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        @theforgesuite
+      </a>
+      <a href="https://www.tiktok.com/@theforgesuite" target="_blank" class="social-link">
+        <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.77 1.52V6.76a4.85 4.85 0 01-1-.07z"/></svg>
+        @theforgesuite
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>
+    <div class="footer-logo">Creative Forge Suite</div>
+    <p style="margin-top:4px">Tools for independent filmmakers. No subscriptions. Ever.</p>
+  </div>
+  <div class="footer-links">
+    <a href="https://www.webtoonforge.com">WebtoonForge</a>
+    <a href="https://www.topsheetforge.com">TopSheetForge</a>
+    <a href="https://www.legalcontractforge.com">LegalContractForge</a>
+  </div>
+  <p>© 2025 Creative Forge Suite</p>
+</footer>
+
+</body>
+</html>
