@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Legal Contract Forge — Entertainment Industry Legal Templates</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#ffffff;--surface:#f8f8f8;--surface2:#f0f0f0;--red:#1a1a1a;--red-dim:#444444;--gold:#6b6b6b;--text:#1a1a1a;--muted:#6b6b6b;--subtle:#e8e8e8;--border:#e8e8e8;--accent:#1a1a1a;--accent-hover:#444444;--radius:12px}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,-apple-system,sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden}
+body::before{display:none}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 40px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--subtle)}
+.logo{font-family:'Inter',system-ui,-apple-system,sans-serif;font-weight:800;font-size:1.2rem;color:var(--text);text-decoration:none;letter-spacing:-.02em}
+.logo span{color:var(--red)}
+nav ul{list-style:none;display:flex;gap:28px}
+nav a{color:var(--muted);text-decoration:none;font-size:.875rem;font-weight:500;transition:color .2s}
+nav a:hover{color:var(--text)}
+.nav-cta{background:var(--red);color:#fff!important;padding:8px 20px;border-radius:8px;font-weight:700!important}
+.nav-cta:hover{background:var(--red-dim)!important}
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 24px 80px}
+.badge{display:inline-flex;align-items:center;gap:8px;background:#f5f5f5;border:1px solid #e0e0e0;color:var(--muted);font-family:'Inter',system-ui,-apple-system,sans-serif;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;padding:6px 14px;border-radius:100px;margin-bottom:28px}
+h1{font-family:'Inter',system-ui,-apple-system,sans-serif;font-weight:700;font-size:clamp(2rem,4vw,3.2rem);line-height:1.05;letter-spacing:-.03em;max-width:860px;margin-bottom:22px}
+h1 em{font-style:normal;color:var(--red)}
+.hero-sub{font-size:clamp(.95rem,1.8vw,1.15rem);color:var(--muted);max-width:560px;margin:0 auto 40px;line-height:1.7}
+.hero-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn{padding:13px 28px;border-radius:10px;font-weight:700;font-size:.95rem;text-decoration:none;border:none;cursor:pointer;display:inline-block;transition:all .2s}
+.btn-primary{background:var(--red);color:#fff}
+.btn-primary:hover{background:var(--red-dim);transform:translateY(-1px)}
+.btn-secondary{background:transparent;color:var(--text);border:1px solid var(--subtle)}
+.btn-secondary:hover{border-color:var(--muted)}
+.stats{margin-top:56px;display:flex;gap:44px;justify-content:center;flex-wrap:wrap}
+.stat .n{font-family:'Inter',system-ui,-apple-system,sans-serif;font-weight:800;font-size:1.9rem}
+.stat .l{font-size:.75rem;color:var(--muted);font-family:'Inter',system-ui,-apple-system,sans-serif;text-transform:uppercase;letter-spacing:.06em}
+section{padding:90px 24px}
+.container{max-width:1080px;margin:0 auto}
+.slabel{font-family:'Inter',system-ui,-apple-system,sans-serif;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--red);margin-bottom:12px}
+h2{font-family:'Inter',system-ui,-apple-system,sans-serif;font-weight:800;font-size:clamp(1.9rem,3.5vw,2.8rem);letter-spacing:-.03em;line-height:1.1;margin-bottom:14px}
+.ssub{color:var(--muted);font-size:1rem;max-width:500px;line-height:1.7}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-top:48px}
+.step{background:var(--surface);border:1px solid var(--subtle);border-radius:var(--radius);padding:28px;position:relative;overflow:hidden}
+.step::before{content:attr(data-n);position:absolute;top:-8px;right:12px;font-family:'Inter',system-ui,-apple-system,sans-serif;font-weight:800;font-size:4.5rem;color:rgba(255,45,78,.03);line-height:1}
+.step-icon{font-size:1.6rem;margin-bottom:12px}
+.step h3{font-family:'Inter',system-ui,-apple-system,sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:6px}
+.step p{color:var(--muted);font-size:.875rem;line-height:1.6}
+#templates{background:var(--surface);border-top:1px solid var(--subtle);border-bottom:1px solid var(--subtle)}
+.tmpl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;margin-top:44px}
+.tmpl-card{background:var(--bg);border:1px solid var(--subtle);border-radius:var(--radius);padding:22px;cursor:pointer;transition:border-color .2s,transform .15s}
+.tmpl-card:hover{border-color:var(--red);transform:translateY(-2px)}
+.tmpl-card.active{border-color:var(--red);background:rgba(255,45,78,.03)}
+.tmpl-price{font-family:'Inter',system-ui,-apple-system,sans-serif;font-size:.75rem;color:var(--red);font-weight:700;margin-bottom:8px}
+.tmpl-name{font-family:'Inter',system-ui,-apple-system,sans-serif;font-weight:700;font-size:1rem;margin-bottom:6px}
+.tmpl-desc{font-size:.8rem;color:var(--muted);line-height:1.5}
+#form-area{padding:32px 0 0}
+.form-wrap{background:var(--bg);border:1px solid var(--subtle);border-radius:var(--radius);padding:32px;margin-top:8px}
+.form-wrap h3{font-family:'Inter',system-ui,-apple-system,sans-serif;font-weight:800;font-size:1.4rem;margin-bottom:6px}
+.form-wrap .form-sub{font-size:.875rem;color:var(--muted);margin-bottom:28px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field.full{grid-column:1/-1}
+.fl{font-family:'Inter',system-ui,-apple-system,sans-serif;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.fi{background:var(--surface2);border:1px solid var(--subtle);color:var(--text);padding:10px 13px;border-radius:8px;font-family:'Inter',system-ui,-apple-system,sans-serif;font-size:.875rem;outline:none;transition:border-color .2s;width:100%}
+.fi:focus{border-color:var(--red)}
+select.fi{cursor:pointer}
+.form-actions{margin-top:22px;display:flex;gap:12px;flex-wrap:wrap}
+.preview-btn{padding:12px 28px;background:var(--red);color:#fff;border:none;border-radius:10px;font-family:'Inter',system-ui,-apple-system,sans-serif;font-weight:700;cursor:pointer;transition:background .2s}
+.preview-btn:hover{background:var(--red-dim)}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:200;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;color:#111;max-width:820px;width:100%;max-height:90vh;overflow-y:auto;border-radius:12px;padding:48px;position:relative}
+.modal-close{position:absolute;top:16px;right:20px;background:none;border:none;font-size:1.4rem;cursor:pointer;color:#666}
+#doc-output{font-family:'Inter',system-ui,-apple-system,sans-serif;font-size:.78rem;line-height:1.9;white-space:pre-wrap;word-break:break-word}
+.modal-actions{margin-top:24px;display:flex;gap:12px;padding-top:20px;border-top:1px solid #eee;flex-wrap:wrap}
+.modal-pay{padding:12px 28px;background:#1a1a1a;color:#fff;border:none;border-radius:9px;font-weight:700;cursor:pointer;font-size:.95rem}
+.modal-print{padding:12px 24px;background:transparent;color:#333;border:1px solid #ccc;border-radius:9px;font-weight:600;cursor:pointer;font-size:.875rem;display:none}
+.pricing-tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin-top:48px}
+.tier{background:var(--surface);border:1px solid var(--subtle);border-radius:var(--radius);padding:30px}
+.tier.featured{border-color:var(--red)}
+.tier-price{font-family:'Inter',system-ui,-apple-system,sans-serif;font-weight:800;font-size:2.5rem;letter-spacing:-.03em;margin:8px 0 4px}
+.tier-docs{list-style:none;margin:16px 0}
+.tier-docs li{padding:5px 0;font-size:.825rem;color:var(--muted);border-bottom:1px solid rgba(0,0,0,.06);display:flex;align-items:center;gap:8px}
+.tier-docs li::before{content:'→';color:var(--red);font-size:.75rem;flex-shrink:0}
+.support-wrap{max-width:520px;margin:44px auto 0}
+footer{padding:44px 24px;border-top:1px solid var(--subtle);text-align:center}
+@media(max-width:700px){nav ul{display:none}.fields{grid-template-columns:1fr}.field.full{grid-column:1}}
+@media print{
+  body{background:white!important;color:black!important}
+  nav,section:not(.modal-overlay),.modal-overlay,footer{display:none!important}
+  .modal{position:static!important;max-height:none!important;padding:0!important;box-shadow:none!important}
+  #doc-output{font-size:.8rem!important}
+  .modal-actions{display:none!important}
+  .modal-close{display:none!important}
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="#" class="logo">Legal<span>Contract</span>Forge</a>
+  <ul>
+    <li><a href="#templates">Templates</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#support">Support</a></li>
+    <li><a href="#templates" class="nav-cta">Browse Templates</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="badge">Entertainment law templates for creators</div>
+  <h1>Legal docs for <em>deals that matter.</em></h1>
+  <p class="hero-sub">Professional entertainment industry templates — option agreements, co-writer deals, actor agreements and more. Fill in your details, pay once, download instantly. No subscription. No lawyer required for standard deals.</p>
+  <div class="hero-actions">
+    <a href="#templates" class="btn btn-primary">Browse Templates →</a>
+    <a href="#how" class="btn btn-secondary">How it works</a>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="n">11</div><div class="l">templates</div></div>
+    <div class="stat"><div class="n">$1</div><div class="l">per document</div></div>
+    <div class="stat"><div class="n">instant</div><div class="l">download</div></div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="container">
+    <div class="slabel">Process</div>
+    <h2>From blank page to<br>signed contract</h2>
+    <p class="ssub">Three steps between your deal and a professional document your attorney or collaborator can actually use.</p>
+    <div class="steps">
+      <div class="step" data-n="1"><div class="step-icon">📑</div><h3>Choose your template</h3><p>Pick from 11 entertainment industry document types — options, co-writer, actor deals, NDAs, and more.</p></div>
+      <div class="step" data-n="2"><div class="step-icon">✍️</div><h3>Fill in your details</h3><p>Simple guided form. Party names, dates, amounts, terms. No legal knowledge required.</p></div>
+      <div class="step" data-n="3"><div class="step-icon">📥</div><h3>Pay $1 & download</h3><p>One-time payment. Print directly or save as PDF. Take it to your entertainment attorney for review.</p></div>
+    </div>
+  </div>
+</section>
+<section id="templates">
+  <div class="container">
+    <div class="slabel">Templates</div>
+    <h2>11 industry-standard documents</h2>
+    <p class="ssub">Every template includes WHEREAS clauses, numbered sections, standard industry provisions, and signature blocks.</p>
+    <div class="tmpl-grid">
+      <div class="tmpl-card" onclick="selectTemplate('nda_mutual')"><div class="tmpl-price">$1</div><div class="tmpl-name">NDA (Mutual)</div><div class="tmpl-desc">Both parties agree to keep shared information confidential. Standard for development conversations.</div></div>
+      <div class="tmpl-card" onclick="selectTemplate('nda_oneway')"><div class="tmpl-price">$1</div><div class="tmpl-name">NDA (One-Way)</div><div class="tmpl-desc">One party discloses to another. Common when pitching projects to producers or studios.</div></div>
+      <div class="tmpl-card" onclick="selectTemplate('deal_memo')"><div class="tmpl-price">$1</div><div class="tmpl-name">Actor Deal Memo</div><div class="tmpl-desc">Short-form actor agreement covering role, compensation, dates, credit, and billing.</div></div>
+      <div class="tmpl-card" onclick="selectTemplate('collab')"><div class="tmpl-price">$1</div><div class="tmpl-name">Collaboration Agreement</div><div class="tmpl-desc">General creative collaboration covering contributions, IP ownership, credit, and compensation split.</div></div>
+      <div class="tmpl-card" onclick="selectTemplate('cowriter')"><div class="tmpl-price">$1</div><div class="tmpl-name">Co-Writer Agreement</div><div class="tmpl-desc">Co-writing partnership with credit split, compensation, decision-making, and reversion rights.</div></div>
+      <div class="tmpl-card" onclick="selectTemplate('wfh')"><div class="tmpl-price">$1</div><div class="tmpl-name">Work-for-Hire Agreement</div><div class="tmpl-desc">Commission a writer. All work product belongs to the commissioning party. Includes warranties.</div></div>
+      <div class="tmpl-card" onclick="selectTemplate('option')"><div class="tmpl-price">$1</div><div class="tmpl-name">Option Agreement</div><div class="tmpl-desc">Option a screenplay for development with period, pricing, purchase terms, and rights granted.</div></div>
+      <div class="tmpl-card" onclick="selectTemplate('purchase')"><div class="tmpl-price">$1</div><div class="tmpl-name">Screenplay Purchase</div><div class="tmpl-desc">Outright purchase of a screenplay including sequel, prequel, and remake rights.</div></div>
+      <div class="tmpl-card" onclick="selectTemplate('copro')"><div class="tmpl-price">$1</div><div class="tmpl-name">Co-Production Agreement</div><div class="tmpl-desc">Two production companies co-producing. Covers financing split, profit, credit, and territory.</div></div>
+      <div class="tmpl-card" onclick="selectTemplate('life_rights')"><div class="tmpl-price">$1</div><div class="tmpl-name">Life Rights Agreement</div><div class="tmpl-desc">Secure the rights to tell a real person's story. Covers compensation, exclusivity, and approvals.</div></div>
+      <div class="tmpl-card" onclick="selectTemplate('producer_attach')"><div class="tmpl-price">$1</div><div class="tmpl-name">Producer Attachment</div><div class="tmpl-desc">Attach a producer to your project with shopping rights, fee percentage, and credit terms.</div></div>
+    </div>
+    <div id="form-area" style="display:none">
+      <div class="form-wrap" id="form-wrap">
+        <h3 id="form-title">Template</h3>
+        <p class="form-sub" id="form-sub"></p>
+        <div class="fields" id="fields-container"></div>
+        <div class="form-actions">
+          <button class="preview-btn" onclick="previewDoc()">Preview Document →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="container">
+    <div class="slabel">Pricing</div>
+    <h2>$1 per document.<br>No subscription. Ever.</h2>
+    <p class="ssub">Every template is $1. Pay once, download instantly. All 11 document types.</p>
+    <div class="pricing-tiers">
+      <div class="tier featured">
+        <div class="slabel">All documents</div>
+        <div class="tier-price">$1</div>
+        <p style="font-size:.875rem;color:var(--muted);margin-bottom:16px">One-time per document</p>
+        <ul class="tier-docs">
+          <li>NDA (Mutual)</li><li>NDA (One-Way)</li><li>Actor Deal Memo</li><li>Collaboration Agreement</li>
+          <li>Co-Writer Agreement</li><li>Work-for-Hire</li><li>Option Agreement</li>
+          <li>Screenplay Purchase</li><li>Co-Production Agreement</li>
+          <li>Life Rights Agreement</li><li>Producer Attachment</li>
+        </ul>
+        <a href="#templates" class="btn btn-primary" style="display:block;text-align:center;text-decoration:none">Browse Templates →</a>
+      </div>
+    </div>
+    <p style="margin-top:28px;text-align:center;font-size:.8rem;color:var(--subtle)">Templates are for informational purposes only. Not a substitute for qualified legal counsel on significant transactions.</p>
+  </div>
+</section>
+
+<section id="support">
+  <div class="container">
+    <div class="slabel">Support</div>
+    <h2>Questions?</h2>
+    <p class="ssub">Get in touch — we'll respond within one business day.</p>
+    <div class="support-wrap">
+      <form id="sf" action="https://formspree.io/f/xjgpndky" method="POST" onsubmit="handleSupport(event)">
+        <div style="display:grid;gap:14px">
+          <div><label class="fl">Name</label><input type="text" name="name" required placeholder="Full name" class="fi"></div>
+          <div><label class="fl">Email</label><input type="email" name="email" required placeholder="your@email.com" class="fi"></div>
+          <div><label class="fl">Message</label><textarea name="message" required rows="4" class="fi" style="resize:vertical" placeholder="What do you need help with?"></textarea></div>
+          <input type="hidden" name="_subject" value="LegalContractForge Support">
+          <button type="submit" class="preview-btn">Send →</button>
+          <div id="support-msg" style="display:none;text-align:center;font-size:.875rem;padding:10px;border-radius:8px"></div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="logo" style="font-family:'Inter',system-ui,-apple-system,sans-serif;font-weight:800;font-size:1.15rem">Legal<span style="color:var(--red)">Contract</span>Forge</div>
+  <p style="margin-top:8px;color:var(--muted);font-size:.875rem">Entertainment legal templates for independent creators.</p>
+  <p style="margin-top:12px;font-size:.72rem;color:var(--subtle);max-width:580px;margin-left:auto;margin-right:auto">Templates are provided for informational purposes only and do not constitute legal advice. Consult a qualified entertainment attorney for significant transactions.</p>
+  <p style="margin-top:14px;font-size:.72rem;color:var(--subtle)">© 2025 LegalContractForge. All rights reserved.</p>
+</footer>
+
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="doc-output"></div>
+    <div class="modal-actions">
+      <button class="modal-pay" id="modal-pay-btn" onclick="handlePayment()">Pay $1 & Download</button>
+      <button class="modal-print" id="modal-print-btn" onclick="window.print()">🖨 Print / Save as PDF</button>
+      <button onclick="closeModal()" style="padding:12px 20px;background:transparent;border:1px solid #ccc;border-radius:9px;cursor:pointer;font-size:.875rem">Close</button>
+    </div>
+  </div>
+</div>
+<script>
+const STRIPE_100 = 'https://buy.stripe.com/14A9AU1zFgLTeatg81asg02';
+let currentTemplate = null;
+let currentDocText = '';
+let paidSession = false;
+
+function checkPaid(){
+  const p = new URLSearchParams(window.location.search);
+  if(p.get('paid')==='true'){
+    localStorage.setItem('lcf_paid_'+Date.now(),'1');
+    paidSession = true;
+    history.replaceState({},'',' ');
+  }
+}
+
+const TEMPLATES = {
+  nda_mutual:{name:'NDA (Mutual)',sub:'Mutual non-disclosure agreement for both parties sharing confidential information.',fields:[
+    {id:'p1',label:'Party 1 Name',ph:'Chaos Pharmacy Productions, LLC'},{id:'p1addr',label:'Party 1 Address',ph:'123 Main St, Los Angeles, CA 90001'},{id:'p2',label:'Party 2 Name',ph:'Full name or entity'},{id:'p2addr',label:'Party 2 Address',ph:'Address'},{id:'purpose',label:'Purpose of Disclosure',ph:'Development and potential co-production of an original feature film'},
+    {id:'duration',label:'Confidentiality Period',type:'select',opts:['1 year','2 years','3 years','5 years']},{id:'state',label:'Governing State',ph:'California'},{id:'date',label:'Effective Date',type:'date'}
+  ]},
+  nda_oneway:{name:'NDA (One-Way)',sub:'One-way non-disclosure where one party discloses to another.',fields:[
+    {id:'disclosing',label:'Disclosing Party',ph:'Your name or company'},{id:'discaddr',label:'Disclosing Party Address',ph:'Address'},{id:'receiving',label:'Receiving Party',ph:'Name or entity'},{id:'recaddr',label:'Receiving Party Address',ph:'Address'},{id:'purpose',label:'Purpose',ph:'Review of an original screenplay for potential representation or production'},
+    {id:'duration',label:'Confidentiality Period',type:'select',opts:['1 year','2 years','3 years','5 years']},{id:'state',label:'Governing State',ph:'California'},{id:'date',label:'Effective Date',type:'date'}
+  ]},
+  deal_memo:{name:'Actor Deal Memo',sub:'Short-form deal memo for actor engagement.',fields:[
+    {id:'prodco',label:'Production Company',ph:'Chaos Pharmacy Productions, LLC'},{id:'project',label:'Project Title',ph:'Metal & Dust'},{id:'actor',label:'Actor Name',ph:'Full legal name'},{id:'role',label:'Role Name',ph:'Character name'},{id:'comptype',label:'Compensation Type',type:'select',opts:['Flat Fee','Weekly Rate','Day Rate']},{id:'compamt',label:'Compensation Amount ($)',ph:'e.g. 5000'},{id:'start',label:'Start Date',type:'date'},{id:'end',label:'End Date (est.)',type:'date'},{id:'billing',label:'Billing Position',ph:'e.g. Lead / Supporting / Featured'},{id:'credit',label:'Credit Type',ph:'e.g. Starring / Also Starring'},{id:'state',label:'Governing State',ph:'California'},{id:'date',label:'Agreement Date',type:'date'}
+  ]},
+  collab:{name:'Collaboration Agreement',sub:'General creative collaboration between two parties.',fields:[
+    {id:'p1',label:'Party 1 Full Name',ph:'Name'},{id:'p1addr',label:'Party 1 Address',ph:'Address'},{id:'p2',label:'Party 2 Full Name',ph:'Name'},{id:'p2addr',label:'Party 2 Address',ph:'Address'},{id:'project',label:'Project Title',ph:'Project name'},{id:'projdesc',label:'Project Description',ph:'Original feature film about...',full:true},{id:'p1contrib',label:'Party 1 Contribution',ph:'Screenplay, story concept'},{id:'p2contrib',label:'Party 2 Contribution',ph:'Financing, production'},{id:'creditsplit',label:'Credit Split',ph:'50/50 or e.g. 60/40'},{id:'compsplit',label:'Compensation Split',ph:'50/50 or e.g. 60/40'},{id:'ipowner',label:'IP Ownership',type:'select',opts:['Jointly owned 50/50','Party 1 owns','Party 2 owns']},{id:'state',label:'Governing State',ph:'California'},{id:'date',label:'Effective Date',type:'date'}
+  ]},
+  cowriter:{name:'Co-Writer Agreement',sub:'Collaboration between two screenwriters on an original project.',fields:[
+    {id:'w1',label:'Writer 1 Full Name',ph:'Name'},{id:'w1addr',label:'Writer 1 Address',ph:'Address'},{id:'w2',label:'Writer 2 Full Name',ph:'Name'},{id:'w2addr',label:'Writer 2 Address',ph:'Address'},{id:'project',label:'Screenplay Title',ph:'Working title'},{id:'logline',label:'Logline',ph:'One-sentence description',full:true},{id:'creditsplit',label:'Credit Split',ph:'e.g. 50/50'},{id:'compsplit',label:'Compensation Split',ph:'e.g. 50/50'},{id:'decision',label:'Primary Decision Maker (disputes)',ph:'Writer 1 or Writer 2 or Mutual'},{id:'reversion',label:'Reversion Conditions',ph:'e.g. If no sale within 3 years from completion'},{id:'state',label:'Governing State',ph:'California'},{id:'date',label:'Effective Date',type:'date'}
+  ]},
+  wfh:{name:'Work-for-Hire Agreement',sub:'Commission a writer. All work product belongs to the commissioning party.',fields:[
+    {id:'commissioning',label:'Commissioning Party',ph:'Production company or producer name'},{id:'commaddr',label:'Commissioning Party Address',ph:'Address'},{id:'writer',label:'Writer Name',ph:'Full legal name'},{id:'writeraddr',label:'Writer Address',ph:'Address'},{id:'project',label:'Project Title',ph:'Working title'},{id:'projdesc',label:'Project Description',ph:'Original screenplay for...',full:true},{id:'delivery',label:'Delivery Date',type:'date'},{id:'fee',label:'Writing Fee ($)',ph:'e.g. 10000'},{id:'schedule',label:'Payment Schedule',ph:'e.g. 50% on signing, 50% on delivery'},{id:'state',label:'Governing State',ph:'California'},{id:'date',label:'Agreement Date',type:'date'}
+  ]},
+  option:{name:'Option Agreement',sub:'Option a screenplay for development.',fields:[
+    {id:'optionor',label:'Optionor (Writer)',ph:'Full legal name'},{id:'optionoraddr',label:'Optionor Address',ph:'Address'},{id:'optionee',label:'Optionee (Producer)',ph:'Name or production company'},{id:'optioneeaddr',label:'Optionee Address',ph:'Address'},{id:'title',label:'Screenplay Title',ph:'Title'},{id:'logline',label:'Logline',ph:'Brief description',full:true},{id:'period',label:'Option Period',type:'select',opts:['12 months','18 months','24 months']},{id:'optionprice',label:'Option Price ($)',ph:'e.g. 5000'},{id:'purchaseprice',label:'Purchase Price ($)',ph:'e.g. 150000'},{id:'credit',label:'Written By Credit',ph:'e.g. Written by [Writer Name]'},{id:'sequel',label:'Sequel Rights',type:'select',opts:['Included','Not included']},{id:'remake',label:'Remake Rights',type:'select',opts:['Included','Not included']},{id:'state',label:'Governing State',ph:'California'},{id:'date',label:'Effective Date',type:'date'}
+  ]},
+  purchase:{name:'Screenplay Purchase Agreement',sub:'Outright purchase of a screenplay.',fields:[
+    {id:'seller',label:'Seller (Writer)',ph:'Full legal name'},{id:'selleraddr',label:'Seller Address',ph:'Address'},{id:'buyer',label:'Buyer',ph:'Name or production company'},{id:'buyeraddr',label:'Buyer Address',ph:'Address'},{id:'title',label:'Screenplay Title',ph:'Title'},{id:'price',label:'Purchase Price ($)',ph:'e.g. 250000'},{id:'credit',label:'Written By Credit',ph:'e.g. Written by [Seller Name]'},{id:'sequel',label:'Sequel Rights',type:'select',opts:['Included','Not included']},{id:'prequel',label:'Prequel Rights',type:'select',opts:['Included','Not included']},{id:'remake',label:'Remake Rights',type:'select',opts:['Included','Not included']},{id:'state',label:'Governing State',ph:'California'},{id:'date',label:'Effective Date',type:'date'}
+  ]},
+  copro:{name:'Co-Production Agreement',sub:'Two companies co-producing a project.',fields:[
+    {id:'co1',label:'Company 1 Name',ph:'Production company 1'},{id:'co1addr',label:'Company 1 Address',ph:'Address'},{id:'co2',label:'Company 2 Name',ph:'Production company 2'},{id:'co2addr',label:'Company 2 Address',ph:'Address'},{id:'project',label:'Project Title',ph:'Title'},{id:'budget',label:'Total Budget ($)',ph:'e.g. 5000000'},{id:'co1pct',label:'Company 1 Financing (%)',ph:'e.g. 60'},{id:'co2pct',label:'Company 2 Financing (%)',ph:'e.g. 40'},{id:'profitsplit',label:'Net Profit Split',ph:'e.g. 60/40 per financing'},{id:'co1credit',label:'Company 1 Credit',ph:'e.g. A [Co1] Production'},{id:'co2credit',label:'Company 2 Credit',ph:'e.g. In association with [Co2]'},{id:'territory',label:'Territory',ph:'e.g. Worldwide'},{id:'state',label:'Governing State',ph:'California'},{id:'date',label:'Effective Date',type:'date'}
+  ]},
+  life_rights:{name:'Life Rights Agreement',sub:'Secure the rights to tell a real person\'s story.',fields:[
+    {id:'subject',label:'Subject Name',ph:'Full legal name of the person'},{id:'subjectaddr',label:'Subject Address',ph:'Address'},{id:'producer',label:'Producer / Company',ph:'Name or company'},{id:'produceraddr',label:'Producer Address',ph:'Address'},{id:'projdesc',label:'Project Description',ph:'A feature film based on the life of...',full:true},{id:'compensation',label:'Compensation ($)',ph:'e.g. 25000'},{id:'exclusivity',label:'Exclusivity Period',type:'select',opts:['1 year','2 years','3 years','5 years']},{id:'approval',label:'Subject Approval Rights',type:'select',opts:['No approval rights','Consultation only','Approval of final script']},{id:'state',label:'Governing State',ph:'California'},{id:'date',label:'Effective Date',type:'date'}
+  ]},
+  producer_attach:{name:'Producer Attachment Agreement',sub:'Attach a producer to your project.',fields:[
+    {id:'producer',label:'Producer Full Name',ph:'Name'},{id:'produceraddr',label:'Producer Address',ph:'Address'},{id:'writer',label:'Writer / Owner',ph:'Name'},{id:'writeraddr',label:'Writer Address',ph:'Address'},{id:'project',label:'Project Title',ph:'Title'},{id:'feepct',label:'Producer Fee (% of budget)',ph:'e.g. 5'},{id:'credit',label:'Producer Credit',ph:'e.g. Produced by [Producer Name]'},{id:'period',label:'Shopping Rights Period',type:'select',opts:['6 months','12 months','18 months']},{id:'exclusivity',label:'Exclusive',type:'select',opts:['Exclusive','Non-exclusive']},{id:'state',label:'Governing State',ph:'California'},{id:'date',label:'Effective Date',type:'date'}
+  ]}
+};
+
+function fv(id){return (document.getElementById('field_'+id)||{}).value||'['+id.toUpperCase()+']';}
+
+function selectTemplate(id){
+  currentTemplate = id;
+  document.querySelectorAll('.tmpl-card').forEach(c=>c.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  const t = TEMPLATES[id];
+  document.getElementById('form-title').textContent = t.name;
+  document.getElementById('form-sub').textContent = t.sub;
+  const fc = document.getElementById('fields-container');
+  fc.innerHTML = t.fields.map(f=>{
+    const cls = f.full ? 'field full' : 'field';
+    if(f.type==='select') return `<div class="${cls}"><label class="fl">${f.label}</label><select class="fi" id="field_${f.id}">${f.opts.map(o=>`<option>${o}</option>`).join('')}</select></div>`;
+    if(f.type==='date') return `<div class="${cls}"><label class="fl">${f.label}</label><input type="date" class="fi" id="field_${f.id}"></div>`;
+    return `<div class="${cls}"><label class="fl">${f.label}</label><input type="text" class="fi" id="field_${f.id}" placeholder="${f.ph||''}"></div>`;
+  }).join('');
+  // set today for date fields
+  document.querySelectorAll('#fields-container input[type=date]').forEach(el=>{ if(!el.value) el.value=new Date().toISOString().split('T')[0]; });
+  const fa = document.getElementById('form-area');
+  fa.style.display='block';
+  setTimeout(()=>fa.scrollIntoView({behavior:'smooth',block:'start'}),100);
+}
+
+function generateDocText(id){
+  const today = new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  if(id==='nda_mutual'){
+    return `MUTUAL NON-DISCLOSURE AGREEMENT
+
+This Mutual Non-Disclosure Agreement ("Agreement") is entered into as of ${fv('date')||today} (the "Effective Date") by and between:
+
+${fv('p1')}, with its principal place of business at ${fv('p1addr')} ("Party A"); and
+
+${fv('p2')}, with its principal place of business at ${fv('p2addr')} ("Party B").
+
+Party A and Party B are hereinafter collectively referred to as the "Parties" and individually as a "Party."
+
+WHEREAS, the Parties desire to explore a potential business relationship in connection with ${fv('purpose')} (the "Purpose"); and
+
+WHEREAS, in connection with the Purpose, each Party may disclose to the other certain confidential and proprietary information;
+
+NOW, THEREFORE, in consideration of the mutual covenants herein and for other good and valuable consideration, the receipt and sufficiency of which are hereby acknowledged, the Parties agree as follows:
+
+1. DEFINITION OF CONFIDENTIAL INFORMATION. "Confidential Information" means any and all non-public information disclosed by either Party to the other, either directly or indirectly, in writing, orally, or by inspection of tangible objects, that is designated as "Confidential," "Proprietary," or some similar designation, or that reasonably should be understood to be confidential given the nature of the information and the circumstances of disclosure. Confidential Information includes, without limitation, creative materials, scripts, treatments, business plans, financial information, technical data, trade secrets, and know-how.
+
+2. OBLIGATIONS OF RECEIVING PARTY. Each Party agrees: (a) to hold the other Party's Confidential Information in strict confidence; (b) not to disclose such Confidential Information to any third party without the prior written consent of the disclosing Party; (c) to use the Confidential Information solely for the Purpose; and (d) to protect the Confidential Information with at least the same degree of care used to protect its own confidential information, but in no event less than reasonable care.
+
+3. EXCLUSIONS. The obligations in Section 2 shall not apply to information that: (a) is or becomes publicly known through no breach of this Agreement; (b) was rightfully in the receiving Party's possession prior to disclosure; (c) is independently developed by the receiving Party without use of the Confidential Information; or (d) is required to be disclosed by law, court order, or governmental authority, provided that the receiving Party gives the disclosing Party prompt prior written notice.
+
+4. TERM. This Agreement shall remain in effect for a period of ${fv('duration')} from the Effective Date. The obligations of confidentiality shall survive termination of this Agreement.
+
+5. RETURN OF MATERIALS. Upon written request by the disclosing Party, the receiving Party shall promptly return or destroy all Confidential Information received, including all copies and derivatives thereof.
+
+6. NO LICENSE. Nothing in this Agreement grants either Party any rights in or to the other Party's Confidential Information except as expressly set forth herein.
+
+7. REMEDIES. Each Party acknowledges that breach of this Agreement may cause irreparable harm for which monetary damages may be inadequate, and agrees that the disclosing Party shall be entitled to seek equitable relief, including injunction and specific performance, in addition to all other remedies available at law.
+
+8. GOVERNING LAW. This Agreement shall be governed by and construed in accordance with the laws of the State of ${fv('state')}, without regard to its conflict of laws principles. Any disputes shall be resolved in the courts of ${fv('state')}.
+
+9. FORCE MAJEURE. Neither Party shall be liable for failure or delay in performing obligations under this Agreement due to causes beyond its reasonable control, including pandemic, government orders, acts of God, or other force majeure events.
+
+10. ARBITRATION. Any dispute arising out of or relating to this Agreement shall be resolved by binding arbitration administered by JAMS in \${fv('state')} in accordance with its Comprehensive Arbitration Rules.
+
+11. ELECTRONIC SIGNATURES. This Agreement may be executed in counterparts. Electronic signatures (including DocuSign, Adobe Sign, or similar platforms) shall be deemed valid and binding with the same force and effect as original ink signatures.
+
+12. ENTIRE AGREEMENT. This Agreement constitutes the entire agreement between the Parties with respect to the subject matter hereof and supersedes all prior discussions and agreements relating thereto.
+
+IN WITNESS WHEREOF, the Parties have executed this Mutual Non-Disclosure Agreement as of the Effective Date.
+
+PARTY A:
+
+Signature: _______________________________
+Name: ${fv('p1')}
+Title: ___________________________________
+Date: ___________________________________
+
+
+PARTY B:
+
+Signature: _______________________________
+Name: ${fv('p2')}
+Title: ___________________________________
+Date: ___________________________________
+
+─────────────────────────────────────────
+THIS TEMPLATE IS PROVIDED FOR INFORMATIONAL PURPOSES ONLY AND DOES NOT CONSTITUTE LEGAL ADVICE. CONSULT A QUALIFIED ENTERTAINMENT ATTORNEY FOR SIGNIFICANT TRANSACTIONS.`;
+  }
+  if(id==='nda_oneway'){
+    return `NON-DISCLOSURE AGREEMENT (ONE-WAY)
+
+This Non-Disclosure Agreement ("Agreement") is entered into as of ${fv('date')||today} by and between:
+
+${fv('disclosing')}, located at ${fv('discaddr')} ("Disclosing Party"); and
+
+${fv('receiving')}, located at ${fv('recaddr')} ("Receiving Party").
+
+WHEREAS, the Disclosing Party desires to disclose certain confidential and proprietary information to the Receiving Party in connection with ${fv('purpose')} (the "Purpose");
+
+NOW, THEREFORE, in consideration of the foregoing and for other good and valuable consideration, the Parties agree as follows:
+
+1. CONFIDENTIAL INFORMATION. "Confidential Information" means all non-public information disclosed by the Disclosing Party to the Receiving Party, including but not limited to scripts, treatments, story concepts, business plans, financial projections, and any other proprietary information.
+
+2. NON-DISCLOSURE OBLIGATIONS. The Receiving Party agrees: (a) to hold all Confidential Information in strict confidence; (b) not to disclose any Confidential Information to third parties without prior written consent; (c) to use Confidential Information solely for the Purpose; and (d) to apply no less than reasonable care in protecting such information.
+
+3. EXCLUSIONS. The Receiving Party's obligations do not apply to information that is: (a) publicly known without breach hereof; (b) already known to the Receiving Party; (c) independently developed; or (d) required to be disclosed by law.
+
+4. TERM. Confidentiality obligations shall remain in effect for ${fv('duration')} from the Effective Date.
+
+5. RETURN OF MATERIALS. Upon request, the Receiving Party shall promptly return or certify destruction of all Confidential Information.
+
+6. REMEDIES. Breach may cause irreparable harm; Disclosing Party is entitled to seek equitable relief in addition to all other remedies.
+
+7. GOVERNING LAW. This Agreement shall be governed by the laws of the State of ${fv('state')}.
+
+IN WITNESS WHEREOF, the Parties have executed this Agreement as of the date first written above.
+
+DISCLOSING PARTY:
+
+Signature: _______________________________
+Name: ${fv('disclosing')}
+Date: ___________________________________
+
+
+RECEIVING PARTY:
+
+Signature: _______________________________
+Name: ${fv('receiving')}
+Date: ___________________________________
+
+─────────────────────────────────────────
+THIS TEMPLATE IS PROVIDED FOR INFORMATIONAL PURPOSES ONLY AND DOES NOT CONSTITUTE LEGAL ADVICE.`;
+  }
+  if(id==='deal_memo'){
+    return `ACTOR DEAL MEMO
+
+Production Company: ${fv('prodco')}
+Project Title: "${fv('project')}"
+Agreement Date: ${fv('date')||today}
+
+This Deal Memo ("Agreement") confirms the engagement terms between ${fv('prodco')} ("Production Company") and ${fv('actor')} ("Artist").
+
+ROLE: ${fv('role')}
+
+COMPENSATION: ${fv('comptype')} of $${fv('compamt')}
+Payment shall be made in accordance with the production's standard payroll schedule.
+
+TERM: Artist's services shall commence on or about ${fv('start')} and conclude on or about ${fv('end')}, subject to the production schedule.
+
+BILLING: ${fv('billing')}
+
+CREDIT: ${fv('credit')} (if picture is theatrically released and Artist completes services)
+Credit is subject to the Production Company's customary credit practices. No casual or inadvertent failure to accord credit shall constitute a material breach.
+
+RIGHTS: Production Company shall own all rights in and to Artist's performance, including all results and proceeds thereof, in perpetuity throughout the universe in all media now known or hereafter devised.
+
+AI AND DIGITAL LIKENESS. Production Company shall not use artificial intelligence, digital doubles, or any synthetic media to generate, simulate, replicate, or alter Artist's likeness, voice, or performance without Artist's prior written consent for each specific use. Any authorized use of AI-generated or AI-altered content incorporating Artist's likeness shall require separate negotiation and additional compensation. This provision survives termination of this Agreement and applies to all derivative works. (Per SAG-AFTRA 2023 Theatrical/Television Contract, Section 12.)
+
+EXCLUSIVITY: Artist's services shall be non-exclusive during the term of this Agreement unless otherwise agreed in writing.
+
+REPRESENTATIONS AND WARRANTIES: Artist represents and warrants that Artist has the right to enter into this Agreement, that Artist's performance will not violate any third-party rights, and that Artist is not under any disability, restriction, or prohibition that would prevent Artist from performing the services hereunder.
+
+GOVERNING LAW: This Agreement shall be governed by the laws of the State of ${fv('state')}.
+
+This Deal Memo is subject to the execution of a long-form agreement containing standard terms and conditions. In the absence of a long-form agreement, this Deal Memo shall constitute the binding agreement between the parties.
+
+AGREED AND ACCEPTED:
+
+PRODUCTION COMPANY:
+
+Signature: _______________________________
+Name: ___________________________________
+Title: ___________________________________
+Date: ___________________________________
+
+
+ARTIST:
+
+Signature: _______________________________
+Name: ${fv('actor')}
+Date: ___________________________________
+
+─────────────────────────────────────────
+THIS TEMPLATE IS PROVIDED FOR INFORMATIONAL PURPOSES ONLY AND DOES NOT CONSTITUTE LEGAL ADVICE.`;
+  }
+  if(id==='option'){
+    return `OPTION AGREEMENT
+
+This Option Agreement ("Agreement") is entered into as of ${fv('date')||today} by and between:
+
+${fv('optionor')}, located at ${fv('optionoraddr')} ("Optionor"); and
+
+${fv('optionee')}, located at ${fv('optioneeaddr')} ("Optionee").
+
+WHEREAS, Optionor is the sole and exclusive owner of all rights in and to the original screenplay entitled "${fv('title')}" (the "Property"), described as follows: ${fv('logline')};
+
+WHEREAS, Optionee desires to obtain an option to acquire all motion picture and allied rights in and to the Property;
+
+NOW, THEREFORE, in consideration of the mutual covenants herein and other good and valuable consideration, the parties agree as follows:
+
+1. GRANT OF OPTION. Optionor hereby grants to Optionee the exclusive and irrevocable option (the "Option") to acquire all motion picture, television, streaming (including SVOD, AVOD, FAST, and future digital platforms), and allied rights in all media now known or hereafter devised in and to the Property, upon the terms and conditions set forth herein.
+
+2. OPTION PERIOD. The Option shall commence on the date hereof and expire ${fv('period')} thereafter (the "Option Period"), unless sooner exercised or terminated.
+
+3. OPTION PRICE. In consideration of this Option, Optionee shall pay to Optionor the sum of $${fv('optionprice')} (the "Option Price"), receipt of which is hereby acknowledged. The Option Price shall be applicable against the Purchase Price upon exercise.
+
+4. PURCHASE PRICE. If Optionee exercises the Option, Optionee shall pay to Optionor the sum of $${fv('purchaseprice')} (the "Purchase Price"), less the Option Price previously paid.
+
+5. EXERCISE OF OPTION. The Option may be exercised at any time during the Option Period by written notice to Optionor accompanied by payment of the balance of the Purchase Price.
+
+6. RIGHTS GRANTED. Upon exercise of the Option, Optionor hereby assigns to Optionee, exclusively and in perpetuity throughout the universe, all motion picture rights, television rights, streaming rights (including SVOD, AVOD, FAST, and any future digital distribution platforms), theatrical rights, video-on-demand rights, and all ancillary, subsidiary, and allied rights in all media now known or hereafter devised in and to the Property, including but not limited to: (a) ${fv('sequel')==='Included'?'Sequel and prequel rights;':'[Sequel rights not included];'} (b) ${fv('remake')==='Included'?'Remake rights;':'[Remake rights not included];'} (c) Merchandising and commercial tie-in rights; (d) The right to adapt, change, translate, add to, and subtract from the Property.
+
+7. RESERVED RIGHTS. Optionor retains all rights not expressly granted herein, including but not limited to publication rights, stage rights, and radio rights.
+
+8. CREDIT. If the Property is produced as a motion picture, Optionee shall accord Optionor the following credit: ${fv('credit')} Credit shall be subject to the customary terms of Optionee's credit agreements.
+
+9. WARRANTIES AND REPRESENTATIONS. Optionor represents and warrants that: (a) Optionor is the sole and exclusive owner of the Property; (b) the Property is wholly original; (c) Optionor has the full right and authority to enter into this Agreement; and (d) the Property does not infringe any third-party rights.
+
+10. GOVERNING LAW. This Agreement shall be governed by the laws of the State of ${fv('state')}.
+
+IN WITNESS WHEREOF, the parties have executed this Option Agreement as of the date first written above.
+
+OPTIONOR:
+
+Signature: _______________________________
+Name: ${fv('optionor')}
+Date: ___________________________________
+
+
+OPTIONEE:
+
+Signature: _______________________________
+Name: ${fv('optionee')}
+Date: ___________________________________
+
+─────────────────────────────────────────
+THIS TEMPLATE IS PROVIDED FOR INFORMATIONAL PURPOSES ONLY AND DOES NOT CONSTITUTE LEGAL ADVICE. CONSULT A QUALIFIED ENTERTAINMENT ATTORNEY FOR SIGNIFICANT TRANSACTIONS.`;
+  }
+  if(id==='cowriter'){
+    return `CO-WRITER AGREEMENT
+
+This Co-Writer Agreement ("Agreement") is entered into as of ${fv('date')||today} by and between:
+
+${fv('w1')}, located at ${fv('w1addr')} ("Writer 1"); and
+
+${fv('w2')}, located at ${fv('w2addr')} ("Writer 2").
+
+WHEREAS, the parties desire to collaborate on the writing of an original screenplay entitled "${fv('project')}" (the "Project"), described as: ${fv('logline')};
+
+NOW, THEREFORE, in consideration of the mutual covenants herein, the parties agree as follows:
+
+1. COLLABORATION. The parties agree to collaborate equally and in good faith on the writing, development, and completion of the Project.
+
+2. CREDIT. The parties agree that the writing credit shall be shared as follows: ${fv('creditsplit')}. Final credit shall be subject to any applicable WGA credit determination procedures. In the event of any credit dispute, either party may submit the matter to WGA arbitration.
+
+3. COMPENSATION. All compensation received in connection with the Project shall be divided as follows: ${fv('compsplit')}.
+
+4. INTELLECTUAL PROPERTY. The Project and all results and proceeds of the parties' services shall be jointly owned by Writer 1 and Writer 2 in accordance with the compensation split set forth above.
+
+5. DECISION-MAKING. In the event of a creative or business dispute that cannot be resolved by mutual agreement, ${fv('decision')} shall have final decision-making authority.
+
+6. REVERSION RIGHTS. ${fv('reversion')}. In the event of reversion, both parties shall retain their respective rights in the Project.
+
+7. REPRESENTATIONS AND WARRANTIES. Each party represents and warrants that: (a) they have the full right and authority to enter into this Agreement; (b) their contributions to the Project are original; and (c) such contributions do not infringe any third-party rights.
+
+8. GOVERNING LAW. This Agreement shall be governed by the laws of the State of ${fv('state')}.
+
+IN WITNESS WHEREOF, the parties have executed this Co-Writer Agreement as of the date first written above.
+
+WRITER 1:
+
+Signature: _______________________________
+Name: ${fv('w1')}
+Date: ___________________________________
+
+
+WRITER 2:
+
+Signature: _______________________________
+Name: ${fv('w2')}
+Date: ___________________________________
+
+─────────────────────────────────────────
+THIS TEMPLATE IS PROVIDED FOR INFORMATIONAL PURPOSES ONLY AND DOES NOT CONSTITUTE LEGAL ADVICE.`;
+  }
+  if(id==='wfh'){
+    return `WORK-FOR-HIRE AGREEMENT
+
+This Work-for-Hire Agreement ("Agreement") is entered into as of ${fv('date')||today} by and between:
+
+${fv('commissioning')}, located at ${fv('commaddr')} ("Commissioning Party"); and
+
+${fv('writer')}, located at ${fv('writeraddr')} ("Writer").
+
+WHEREAS, Commissioning Party desires to engage Writer to create certain written materials for the Project (as defined below);
+
+NOW, THEREFORE, in consideration of the mutual covenants herein, the parties agree as follows:
+
+1. SERVICES. Writer agrees to write, develop, and deliver to Commissioning Party the following: ${fv('projdesc')} (the "Work") for the project entitled "${fv('project')}" (the "Project").
+
+2. DELIVERY. Writer shall deliver the completed Work to Commissioning Party on or before ${fv('delivery')}.
+
+3. WORK MADE FOR HIRE. The Work is a "work made for hire" as defined under the United States Copyright Act (17 U.S.C. § 101). Commissioning Party shall be the sole author and owner of the Work and all copyrights therein from the moment of creation. To the extent the Work does not qualify as a work made for hire, Writer hereby irrevocably assigns to Commissioning Party all right, title, and interest in and to the Work, including all intellectual property rights therein, in perpetuity throughout the universe.
+
+4. COMPENSATION. In full consideration for Writer's services and the rights granted herein, Commissioning Party shall pay Writer a writing fee of $${fv('fee')} as follows: ${fv('schedule')}.
+
+5. REPRESENTATIONS AND WARRANTIES. Writer represents and warrants that: (a) Writer has the full right and authority to enter into this Agreement; (b) the Work will be wholly original with Writer; (c) the Work will not infringe any third-party copyright, trademark, or other right; and (d) Writer has not entered into any agreement that conflicts with this Agreement.
+
+6. CREDIT. Commissioning Party may, at its sole discretion, accord Writer a "Written by" credit, but shall not be obligated to do so.
+
+7. GOVERNING LAW. This Agreement shall be governed by the laws of the State of ${fv('state')}.
+
+IN WITNESS WHEREOF, the parties have executed this Work-for-Hire Agreement as of the date first written above.
+
+COMMISSIONING PARTY:
+
+Signature: _______________________________
+Name: ${fv('commissioning')}
+Title: ___________________________________
+Date: ___________________________________
+
+
+WRITER:
+
+Signature: _______________________________
+Name: ${fv('writer')}
+Date: ___________________________________
+
+─────────────────────────────────────────
+THIS TEMPLATE IS PROVIDED FOR INFORMATIONAL PURPOSES ONLY AND DOES NOT CONSTITUTE LEGAL ADVICE.`;
+  }
+  if(id==='collab'){
+    return `COLLABORATION AGREEMENT
+
+This Collaboration Agreement ("Agreement") is entered into as of ${fv('date')||today} by and between:
+
+${fv('p1')}, located at ${fv('p1addr')} ("Party 1"); and
+
+${fv('p2')}, located at ${fv('p2addr')} ("Party 2").
+
+WHEREAS, the parties desire to collaborate on the development and production of "${fv('project')}" (the "Project"), described as: ${fv('projdesc')};
+
+NOW, THEREFORE, in consideration of the mutual covenants herein, the parties agree as follows:
+
+1. CONTRIBUTIONS. Party 1 shall contribute: ${fv('p1contrib')}. Party 2 shall contribute: ${fv('p2contrib')}.
+
+2. INTELLECTUAL PROPERTY. Ownership of the Project and all associated intellectual property shall be: ${fv('ipowner')}.
+
+3. CREDIT. All credits shall be shared as follows: ${fv('creditsplit')}.
+
+4. COMPENSATION. All revenues derived from the Project shall be divided: ${fv('compsplit')}.
+
+5. DECISION-MAKING. All major creative and business decisions shall require mutual written consent of both parties.
+
+6. CONFIDENTIALITY. Each party shall keep confidential all non-public information related to the Project.
+
+7. REPRESENTATIONS. Each party represents that they have the right to enter into this Agreement and that their contributions will not infringe third-party rights.
+
+8. GOVERNING LAW. Governed by the laws of the State of ${fv('state')}.
+
+IN WITNESS WHEREOF:
+
+PARTY 1:
+
+Signature: _______________________________
+Name: ${fv('p1')}
+Date: ___________________________________
+
+PARTY 2:
+
+Signature: _______________________________
+Name: ${fv('p2')}
+Date: ___________________________________
+
+─────────────────────────────────────────
+THIS TEMPLATE IS PROVIDED FOR INFORMATIONAL PURPOSES ONLY AND DOES NOT CONSTITUTE LEGAL ADVICE.`;
+  }
+  if(id==='purchase'){
+    return `SCREENPLAY PURCHASE AGREEMENT
+
+This Screenplay Purchase Agreement ("Agreement") is entered into as of ${fv('date')||today} by and between:
+
+${fv('seller')}, located at ${fv('selleraddr')} ("Seller"); and
+
+${fv('buyer')}, located at ${fv('buyeraddr')} ("Buyer").
+
+WHEREAS, Seller is the sole and exclusive owner of all rights in and to the original screenplay entitled "${fv('title')}" (the "Property");
+
+WHEREAS, Buyer desires to purchase all motion picture and allied rights in and to the Property;
+
+NOW, THEREFORE, the parties agree as follows:
+
+1. SALE OF RIGHTS. Seller hereby sells, assigns, and transfers to Buyer, exclusively and in perpetuity throughout the universe, all motion picture, television, streaming, and allied rights in and to the Property, including ${fv('sequel')==='Included'?'sequel and prequel rights, ':''} ${fv('remake')==='Included'?'remake rights, ':''} and all ancillary rights.
+
+2. PURCHASE PRICE. Buyer shall pay Seller $${fv('price')} as full consideration for the rights granted herein.
+
+3. CREDIT. Buyer shall accord Seller the following credit: ${fv('credit')}, subject to customary credit provisions.
+
+4. WARRANTIES. Seller represents and warrants that Seller owns the Property outright; the Property is wholly original; and Seller has the full right to enter into this Agreement.
+
+5. RESERVED RIGHTS. Seller retains publication, stage, and radio rights not expressly granted.
+
+6. GOVERNING LAW. Governed by the laws of the State of ${fv('state')}.
+
+SELLER:
+
+Signature: _______________________________
+Name: ${fv('seller')}
+Date: ___________________________________
+
+BUYER:
+
+Signature: _______________________________
+Name: ${fv('buyer')}
+Date: ___________________________________
+
+─────────────────────────────────────────
+THIS TEMPLATE IS PROVIDED FOR INFORMATIONAL PURPOSES ONLY AND DOES NOT CONSTITUTE LEGAL ADVICE.`;
+  }
+  if(id==='copro'){
+    return `CO-PRODUCTION AGREEMENT
+
+This Co-Production Agreement ("Agreement") is entered into as of ${fv('date')||today} by and between:
+
+${fv('co1')}, located at ${fv('co1addr')} ("Company 1"); and
+
+${fv('co2')}, located at ${fv('co2addr')} ("Company 2").
+
+WHEREAS, the parties desire to co-produce "${fv('project')}" (the "Picture") with a total budget of approximately $${fv('budget')};
+
+NOW, THEREFORE, the parties agree as follows:
+
+1. CO-PRODUCTION. The parties shall jointly produce the Picture for theatrical, streaming (SVOD, AVOD, FAST), home entertainment, digital, and all allied exploitation in all media now known or hereafter devised throughout ${fv('territory')}.
+
+2. FINANCING. Company 1 shall contribute ${fv('co1pct')}% and Company 2 shall contribute ${fv('co2pct')}% of the total budget.
+
+3. PROFIT PARTICIPATION. Net profits shall be shared: ${fv('profitsplit')}.
+
+4. CREDITS. Company 1 credit: ${fv('co1credit')}. Company 2 credit: ${fv('co2credit')}.
+
+5. DECISION-MAKING. All major decisions require mutual written consent of both parties. A deadlock resolution mechanism shall be agreed upon in the long-form agreement.
+
+6. COMPLETION GUARANTEE. The parties shall cooperate to secure a completion bond from a recognized entertainment completion guarantor.
+
+7. GOVERNING LAW. Governed by the laws of the State of ${fv('state')}.
+
+COMPANY 1:
+
+Signature: _______________________________
+Name: ${fv('co1')}
+Title: ___________________________________
+Date: ___________________________________
+
+COMPANY 2:
+
+Signature: _______________________________
+Name: ${fv('co2')}
+Title: ___________________________________
+Date: ___________________________________
+
+─────────────────────────────────────────
+THIS TEMPLATE IS PROVIDED FOR INFORMATIONAL PURPOSES ONLY AND DOES NOT CONSTITUTE LEGAL ADVICE.`;
+  }
+  if(id==='life_rights'){
+    return `LIFE RIGHTS AGREEMENT
+
+This Life Rights Agreement ("Agreement") is entered into as of ${fv('date')||today} by and between:
+
+${fv('subject')}, located at ${fv('subjectaddr')} ("Subject"); and
+
+${fv('producer')}, located at ${fv('produceraddr')} ("Producer").
+
+WHEREAS, Producer desires to develop, produce, and exploit motion picture(s) and other productions based upon the life story of Subject, described as: ${fv('projdesc')};
+
+NOW, THEREFORE, the parties agree as follows:
+
+1. GRANT OF RIGHTS. Subject hereby grants to Producer the exclusive right, during the exclusivity period, to develop, produce, distribute, and exploit one or more motion pictures, television series, limited series, streaming productions (SVOD, AVOD, FAST), podcasts, and/or allied productions in all media now known or hereafter devised based upon Subject's life story, including the right to use Subject's name, likeness, voice, biography, and personal experiences.
+
+2. COMPENSATION. Producer shall pay Subject $${fv('compensation')} as follows: 50% upon signing; 50% upon commencement of principal photography.
+
+3. EXCLUSIVITY. Subject's grant of rights shall be exclusive for a period of ${fv('exclusivity')} from the Effective Date.
+
+4. APPROVAL RIGHTS. ${fv('approval')}.
+
+5. RESERVED RIGHTS. Subject retains the right to publish an autobiography and to cooperate with any documentary not competitive with Producer's production.
+
+6. REPRESENTATIONS. Subject represents that Subject has the full right to enter into this Agreement and that the life story information is true and accurate to the best of Subject's knowledge.
+
+7. GOVERNING LAW. Governed by the laws of the State of ${fv('state')}.
+
+SUBJECT:
+
+Signature: _______________________________
+Name: ${fv('subject')}
+Date: ___________________________________
+
+PRODUCER:
+
+Signature: _______________________________
+Name: ${fv('producer')}
+Date: ___________________________________
+
+─────────────────────────────────────────
+THIS TEMPLATE IS PROVIDED FOR INFORMATIONAL PURPOSES ONLY AND DOES NOT CONSTITUTE LEGAL ADVICE.`;
+  }
+  if(id==='producer_attach'){
+    return `PRODUCER ATTACHMENT AGREEMENT
+
+This Producer Attachment Agreement ("Agreement") is entered into as of ${fv('date')||today} by and between:
+
+${fv('producer')}, located at ${fv('produceraddr')} ("Producer"); and
+
+${fv('writer')}, located at ${fv('writeraddr')} ("Writer/Owner").
+
+WHEREAS, Writer/Owner owns the rights to the original project entitled "${fv('project')}" (the "Project"); and
+
+WHEREAS, Writer/Owner desires to attach Producer to the Project in connection with its development and production;
+
+NOW, THEREFORE, the parties agree as follows:
+
+1. ATTACHMENT. Writer/Owner hereby attaches Producer to the Project for the shopping rights period set forth herein.
+
+2. SHOPPING RIGHTS. Producer shall have the ${fv('exclusivity').toLowerCase()} right to shop, pitch, and package the Project to studios, networks, streamers, financiers, and other potential partners for a period of ${fv('period')} from the Effective Date (the "Shopping Period").
+
+3. PRODUCER FEE. In the event the Project is set up, greenlit, or produced, Producer shall receive a producer fee equal to ${fv('feepct')}% of the total production budget, to be negotiated in the applicable production agreement.
+
+4. CREDIT. Producer shall receive the following credit on the Project: ${fv('credit')}, subject to guild requirements and customary credit provisions.
+
+5. OBLIGATIONS. Producer shall use commercially reasonable efforts to place the Project during the Shopping Period. Producer shall consult with Writer/Owner on all material pitching decisions.
+
+6. REVERSION. If Producer fails to set up the Project by the end of the Shopping Period, all rights shall automatically revert to Writer/Owner, and this Agreement shall terminate.
+
+7. REPRESENTATIONS. Each party represents that they have the right to enter into this Agreement.
+
+8. GOVERNING LAW. Governed by the laws of the State of ${fv('state')}.
+
+PRODUCER:
+
+Signature: _______________________________
+Name: ${fv('producer')}
+Date: ___________________________________
+
+WRITER/OWNER:
+
+Signature: _______________________________
+Name: ${fv('writer')}
+Date: ___________________________________
+
+─────────────────────────────────────────
+THIS TEMPLATE IS PROVIDED FOR INFORMATIONAL PURPOSES ONLY AND DOES NOT CONSTITUTE LEGAL ADVICE.`;
+  }
+  return 'Document template not found.';
+}
+
+function previewDoc(){
+  if(!currentTemplate){alert('Select a template first.');return;}
+  currentDocText = generateDocText(currentTemplate);
+  document.getElementById('doc-output').textContent = currentDocText;
+  document.getElementById('modal').classList.add('open');
+  if(paidSession){
+    document.getElementById('modal-pay-btn').style.display='none';
+    document.getElementById('modal-print-btn').style.display='block';
+  } else {
+    document.getElementById('modal-pay-btn').style.display='block';
+    document.getElementById('modal-print-btn').style.display='none';
+  }
+}
+
+function closeModal(){document.getElementById('modal').classList.remove('open');}
+
+function handlePayment(){
+  if(STRIPE_100==='https://buy.stripe.com/14A9AU1zFgLTeatg81asg02'){alert('Payment coming soon — check back shortly.');return;}
+  const ret = encodeURIComponent(location.href.split('?')[0]+'?paid=true&doc='+currentTemplate);
+  location.href = STRIPE_100+'?success_url='+ret;
+}
+
+async function handleSupport(e){
+  e.preventDefault();
+  const btn=e.target.querySelector('button[type=submit]');
+  const msg=document.getElementById('support-msg');
+  btn.textContent='Sending...';btn.disabled=true;
+  try{
+    const r=await fetch(e.target.action,{method:'POST',body:new FormData(e.target),headers:{Accept:'application/json'}});
+    if(r.ok){e.target.reset();msg.style.display='block';msg.style.background='rgba(74,222,128,.1)';msg.style.color='#4ade80';msg.textContent='✓ Sent!';btn.textContent='Sent!';}
+    else throw 0;
+  }catch{msg.style.display='block';msg.style.background='rgba(26,26,26,.06)';msg.style.color='#1a1a1a';msg.textContent='Error. Try again.';btn.textContent='Send →';btn.disabled=false;}
+}
+
+document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)closeModal();});
+checkPaid();
+</script>
+</body>
+</html>

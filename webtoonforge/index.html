@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WebtoonForge — Screenplay to Webtoon Script Converter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+  if (typeof pdfjsLib !== 'undefined') {
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  }
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#ffffff;--surface:#f8f8f8;--surface2:#f0f0f0;
+  --red:#1a1a1a;--red-dim:#444444;
+  --gold:#6b6b6b;
+  --text:#1a1a1a;--muted:#6b6b6b;--subtle:#e8e8e8;--border:#e8e8e8;
+  --accent:#1a1a1a;--accent-hover:#444444;
+  --radius:12px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,-apple-system,sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden}
+
+/* noise */
+body::before{display:none}
+
+/* ─── NAV ─── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 40px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--subtle)}
+.logo{font-family:'Inter',system-ui,-apple-system,sans-serif;font-weight:800;font-size:1.25rem;color:var(--text);text-decoration:none;letter-spacing:-.02em}
+.logo span{color:var(--red)}
+nav ul{list-style:none;display:flex;gap:32px}
+nav a{color:var(--muted);text-decoration:none;font-size:.875rem;font-weight:500;transition:color .2s}
+nav a:hover{color:var(--text)}
+.nav-cta{background:var(--red);color:#fff!important;padding:8px 20px;border-radius:8px;font-weight:700!important}
+.nav-cta:hover{background:var(--red-dim)!important}
+
+/* ─── HERO ─── */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 24px 80px;position:relative}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:#f5f5f5;border:1px solid #e0e0e0;color:var(--muted);font-family:'Inter',system-ui,-apple-system,sans-serif;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;padding:6px 14px;border-radius:100px;margin-bottom:28px}
+.hero-badge::before{content:'◆';font-size:.6rem}
+h1{font-family:'Inter',system-ui,-apple-system,sans-serif;font-weight:700;font-size:clamp(2rem,4vw,3.2rem);line-height:1.05;letter-spacing:-.03em;max-width:900px;margin-bottom:24px}
+h1 em{font-style:normal;color:var(--red)}
+.hero-sub{font-size:clamp(1rem,2vw,1.2rem);color:var(--muted);max-width:560px;margin:0 auto 44px;line-height:1.7}
+.hero-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:var(--red);color:#fff;padding:14px 32px;border-radius:10px;font-weight:700;font-size:1rem;text-decoration:none;border:none;cursor:pointer;transition:background .2s,transform .1s;display:inline-block}
+.btn-primary:hover{background:var(--red-dim);transform:translateY(-1px)}
+.btn-secondary{background:transparent;color:var(--text);padding:14px 32px;border-radius:10px;font-weight:600;font-size:1rem;text-decoration:none;border:1px solid var(--subtle);cursor:pointer;transition:border-color .2s;display:inline-block}
+.btn-secondary:hover{border-color:var(--muted)}
+.hero-meta{margin-top:60px;display:flex;gap:48px;justify-content:center;flex-wrap:wrap}
+.hero-stat .number{font-family:'Inter',system-ui,-apple-system,sans-serif;font-weight:800;font-size:2rem;color:var(--text)}
+.hero-stat .label{font-size:.8rem;color:var(--muted);font-family:'Inter',system-ui,-apple-system,sans-serif;text-transform:uppercase;letter-spacing:.06em}
+
+/* ─── SECTIONS ─── */
+section{padding:100px 24px;position:relative}
+.container{max-width:1100px;margin:0 auto}
+.section-label{font-family:'Inter',system-ui,-apple-system,sans-serif;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--red);margin-bottom:14px}
+h2{font-family:'Inter',system-ui,-apple-system,sans-serif;font-weight:800;font-size:clamp(2rem,4vw,3rem);letter-spacing:-.03em;line-height:1.1;margin-bottom:16px}
+.section-sub{color:var(--muted);font-size:1.05rem;max-width:520px;line-height:1.7}
+
+/* ─── HOW IT WORKS ─── */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;margin-top:56px}
+.step{background:var(--surface);border:1px solid var(--subtle);border-radius:var(--radius);padding:32px;position:relative;overflow:hidden}
+.step::before{content:attr(data-n);position:absolute;top:-10px;right:16px;font-family:'Inter',system-ui,-apple-system,sans-serif;font-weight:800;font-size:5rem;color:rgba(255,45,78,.03);line-height:1}
+.step-icon{font-size:1.8rem;margin-bottom:16px}
+.step h3{font-family:'Inter',system-ui,-apple-system,sans-serif;font-weight:700;font-size:1.15rem;margin-bottom:8px}
+.step p{color:var(--muted);font-size:.9rem;line-height:1.6}
+
+/* ─── FEATURES ─── */
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;margin-top:56px}
+.feature{background:var(--surface);border:1px solid var(--subtle);border-radius:var(--radius);padding:28px 28px 28px 28px;transition:border-color .2s}
+.feature:hover{border-color:rgba(255,45,78,.25)}
+.feature-tag{font-family:'Inter',system-ui,-apple-system,sans-serif;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:10px}
+.feature h3{font-family:'Inter',system-ui,-apple-system,sans-serif;font-weight:700;font-size:1.1rem;margin-bottom:8px}
+.feature p{color:var(--muted);font-size:.875rem;line-height:1.65}
+
+/* ─── TOOL ─── */
+#tool{background:var(--surface);border-top:1px solid var(--subtle);border-bottom:1px solid var(--subtle)}
+.tool-wrap{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--subtle);border-radius:var(--radius);overflow:hidden;margin-top:48px;min-height:680px}
+.tool-pane{background:var(--bg);display:flex;flex-direction:column}
+.pane-header{padding:14px 20px;background:var(--surface2);display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--subtle)}
+.pane-title{font-family:'Inter',system-ui,-apple-system,sans-serif;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.pane-actions{display:flex;gap:8px}
+.pane-btn{background:var(--surface);border:1px solid var(--subtle);color:var(--muted);font-size:.75rem;padding:5px 12px;border-radius:6px;cursor:pointer;font-family:'Inter',system-ui,-apple-system,sans-serif;transition:all .2s}
+.pane-btn:hover{border-color:var(--red);color:var(--text)}
+.pane-btn.primary{background:var(--red);border-color:var(--red);color:#fff}
+.pane-btn.primary:hover{background:var(--red-dim)}
+textarea#screenplay-input{flex:1;background:transparent;border:none;resize:none;color:var(--text);font-family:'Inter',system-ui,-apple-system,sans-serif;font-size:.8rem;line-height:1.7;padding:20px;outline:none;min-height:580px}
+textarea#screenplay-input::placeholder{color:#aaa}
+#output-area{flex:1;overflow-y:auto;padding:20px;font-size:.82rem;line-height:1.7;min-height:580px}
+#output-area .placeholder{color:var(--subtle);font-style:italic;padding:20px 0}
+
+/* Output styling */
+.ep-header{font-family:'Inter',system-ui,-apple-system,sans-serif;font-weight:800;font-size:1.1rem;color:var(--gold);border-bottom:1px solid var(--subtle);padding-bottom:8px;margin:24px 0 16px}
+.ep-header:first-child{margin-top:0}
+.ep-meta{font-family:'Inter',system-ui,-apple-system,sans-serif;font-size:.65rem;color:var(--muted);margin-bottom:20px;letter-spacing:.04em}
+.scene-block{background:var(--surface);border:1px solid var(--subtle);border-radius:10px;padding:16px 18px;margin-bottom:14px}
+.scene-slug{font-family:'Inter',system-ui,-apple-system,sans-serif;font-size:.65rem;color:var(--red);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}
+.panel-item{border-left:2px solid var(--subtle);padding:8px 0 8px 14px;margin-bottom:8px;font-size:.8rem}
+.panel-item:last-child{margin-bottom:0}
+.panel-num{font-family:'Inter',system-ui,-apple-system,sans-serif;font-size:.65rem;color:var(--gold);margin-bottom:3px}
+.panel-visual{color:var(--text);margin-bottom:4px}
+.panel-dialogue{color:var(--muted);font-style:italic;font-size:.78rem}
+.panel-sfx{color:var(--red);font-size:.75rem;font-family:'Inter',system-ui,-apple-system,sans-serif;letter-spacing:.04em}
+.panel-caption{color:#7ec8e3;font-size:.75rem;font-style:italic}
+
+/* Tool controls */
+.tool-controls{padding:12px 20px;background:var(--surface2);border-top:1px solid var(--subtle);display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.ctrl-group{display:flex;align-items:center;gap:8px}
+.ctrl-label{font-family:'Inter',system-ui,-apple-system,sans-serif;font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+select.ctrl-select{background:var(--surface);border:1px solid var(--subtle);color:var(--text);font-size:.75rem;padding:5px 10px;border-radius:6px;font-family:'Inter',system-ui,-apple-system,sans-serif;cursor:pointer;outline:none}
+.ep-nav{display:flex;gap:6px;margin-left:auto}
+.ep-nav button{background:var(--surface);border:1px solid var(--subtle);color:var(--muted);font-size:.75rem;padding:5px 10px;border-radius:6px;cursor:pointer;font-family:'Inter',system-ui,-apple-system,sans-serif;transition:all .2s}
+.ep-nav button:hover,.ep-nav button.active{border-color:var(--red);color:var(--text)}
+
+/* ─── COMPARE ─── */
+.compare-table{margin-top:56px;width:100%;border-collapse:collapse;font-size:.875rem}
+.compare-table th{font-family:'Inter',system-ui,-apple-system,sans-serif;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:12px 16px;text-align:left;border-bottom:1px solid var(--subtle)}
+.compare-table th.ours{color:var(--red)}
+.compare-table td{padding:14px 16px;border-bottom:1px solid rgba(0,0,0,.08);vertical-align:middle}
+.compare-table tr:hover td{background:rgba(0,0,0,.02)}
+.compare-table .feature-name{color:var(--text);font-weight:500}
+.compare-table .check{color:#4ade80;font-size:1.1rem}
+.compare-table .cross{color:var(--muted)}
+.compare-table .ours-col{background:rgba(255,45,78,.03)}
+
+/* ─── PRICING ─── */
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-top:56px}
+.plan{background:var(--surface);border:1px solid var(--subtle);border-radius:var(--radius);padding:36px;position:relative}
+.plan.featured{border-color:var(--red);background:linear-gradient(160deg,rgba(255,45,78,.07),var(--surface))}
+.plan-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--red);color:#fff;font-family:'Inter',system-ui,-apple-system,sans-serif;font-size:.65rem;padding:4px 14px;border-radius:100px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+.plan-name{font-family:'Inter',system-ui,-apple-system,sans-serif;font-weight:800;font-size:1.1rem;margin-bottom:6px}
+.plan-price{font-family:'Inter',system-ui,-apple-system,sans-serif;font-weight:800;font-size:2.8rem;letter-spacing:-.03em;margin-bottom:4px}
+.plan-price span{font-size:1rem;font-family:'Inter',system-ui,-apple-system,sans-serif;font-weight:400;color:var(--muted)}
+.plan-desc{color:var(--muted);font-size:.85rem;margin-bottom:28px}
+.plan-features{list-style:none;margin-bottom:32px}
+.plan-features li{padding:7px 0;border-bottom:1px solid rgba(0,0,0,.08);font-size:.875rem;color:var(--muted);display:flex;align-items:center;gap:10px}
+.plan-features li::before{content:'✓';color:var(--red);font-weight:700;flex-shrink:0}
+.plan-features li.dimmed{color:var(--subtle)}
+.plan-features li.dimmed::before{content:'–';color:var(--subtle)}
+.plan-cta{width:100%;padding:13px;border-radius:10px;font-size:.95rem;font-weight:700;cursor:pointer;border:none;transition:all .2s}
+.plan-cta.outline{background:transparent;border:1px solid var(--subtle);color:var(--text)}
+.plan-cta.outline:hover{border-color:var(--muted)}
+.plan-cta.solid{background:var(--red);color:#fff}
+.plan-cta.solid:hover{background:var(--red-dim)}
+
+/* ─── FOOTER ─── */
+footer{padding:48px 24px;border-top:1px solid var(--subtle);text-align:center}
+footer .logo{display:inline-block;margin-bottom:12px;font-family:'Inter',system-ui,-apple-system,sans-serif;font-weight:800;font-size:1.2rem}
+footer p{color:var(--muted);font-size:.85rem}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:#f8f8f8}
+::-webkit-scrollbar-thumb{background:#ccc;border-radius:3px}
+
+@media(max-width:768px){
+  nav ul{display:none}
+  .tool-wrap{grid-template-columns:1fr}
+  .hero-meta{gap:28px}
+  nav{padding:16px 20px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">Webtoon<span>Forge</span></a>
+  <ul>
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#tool">Live Tool</a></li>
+    <li><a href="#compare">Compare</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#support">Support</a></li>
+    <li><a href="#tool" class="nav-cta">Try Free</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">First-of-its-kind tool for webtoon creators</div>
+  <h1>Your screenplay.<br><em>Webtoon-ready</em> in seconds.</h1>
+  <p class="hero-sub">Paste any Fountain screenplay or upload a Final Draft (.fdx) or PDF file. WebtoonForge converts it into artist-ready webtoon panel scripts instantly. First conversion free — then just $1 each, no subscription.</p>
+  <div class="hero-actions">
+    <a href="#tool" class="btn-primary">Convert a screenplay →</a>
+    <a href="#how" class="btn-secondary">See how it works</a>
+  </div>
+  <div class="hero-meta">
+    <div class="hero-stat"><div class="number">24–48</div><div class="label">pages per episode</div></div>
+    <div class="hero-stat"><div class="number">4–6</div><div class="label">panels per page</div></div>
+    <div class="hero-stat"><div class="number">100%</div><div class="label">artist-ready output</div></div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="container">
+    <div class="section-label">Process</div>
+    <h2>From feature script to<br>full webtoon series</h2>
+    <p class="section-sub">Three steps between your finished screenplay and a deliverable your art team can work from immediately.</p>
+    <div class="steps">
+      <div class="step" data-n="1">
+        <div class="step-icon">📄</div>
+        <h3>Paste or upload your script</h3>
+        <p>Drop in any screenplay in Fountain format — full features, pilots, or shorts. WebtoonForge reads scene headings, action, and dialogue automatically.</p>
+      </div>
+      <div class="step" data-n="2">
+        <div class="step-icon">✂️</div>
+        <h3>Auto-split into episodes</h3>
+        <p>The engine analyzes narrative beats and pacing, splitting your script into webtoon episodes of 24–48 pages each. You control episode length.</p>
+      </div>
+      <div class="step" data-n="3">
+        <div class="step-icon">🎨</div>
+        <h3>Export panel scripts</h3>
+        <p>Every page gets panel breakdowns with shot types, visual descriptions, dialogue bubble placement, sound FX, and caption notes — ready to hand to an artist.</p>
+      </div>
+      <div class="step" data-n="4">
+        <div class="step-icon">📤</div>
+        <h3>Export & publish</h3>
+        <p>Download each episode as a formatted .txt panel script or copy directly to your workflow. Upload to Webtoon, Tapas, or your art team's pipeline.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features" style="padding-top:0">
+  <div class="container">
+    <div class="section-label">What you get</div>
+    <h2>Everything your art team needs</h2>
+    <p class="section-sub">No guesswork. No back-and-forth. Every panel described with enough precision to draw from directly.</p>
+    <div class="features-grid">
+      <div class="feature">
+        <div class="feature-tag">Panel Breakdown</div>
+        <h3>Shot-level visual descriptions</h3>
+        <p>Each panel gets a shot type (OTS, WIDE, CLOSE, POV), character positions, expressions, and scene environment — exactly what an artist needs to lay out the page.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-tag">Dialogue</div>
+        <h3>Bubble placement guidance</h3>
+        <p>Dialogue is mapped to specific panels with bubble placement notes — left, right, overlapping — so your letterer knows exactly where text lands on the page.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-tag">Sound & Captions</div>
+        <h3>SFX and narration boxes</h3>
+        <p>Action scenes get sound effect suggestions (CRACK, WHOOSH, SLAM). Narrator boxes from action lines are converted to webtoon caption format automatically.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-tag">Episode Structure</div>
+        <h3>Narrative-aware pacing</h3>
+        <p>Episode splits happen at natural story beats — act turns, cliffhangers, scene transitions — not arbitrary page counts. Your story reads the way you intended.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-tag">Export</div>
+        <h3>Plain text, no lock-in</h3>
+        <p>Output is clean, readable plain text your art team can open in anything. No proprietary formats, no subscriptions required to read what you exported.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-tag">Format</div>
+        <h3>Fountain & FDX support</h3>
+        <p>Works with standard Fountain (.fountain) and Final Draft XML (.fdx) formats. If your software can export either, WebtoonForge can read it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE TOOL -->
+<section id="tool">
+  <div class="container">
+    <div class="section-label">Live Tool</div>
+    <h2>Try it right now</h2>
+    <p class="section-sub">Paste a Fountain screenplay below. WebtoonForge parses it and generates a panel script in real time — no account needed.</p>
+
+    <div class="tool-controls" style="margin-top:48px;border-radius:var(--radius) var(--radius) 0 0;background:var(--surface2);border:1px solid var(--subtle);border-bottom:none;padding:14px 20px;display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+      <div class="ctrl-group">
+        <span class="ctrl-label">Pages/ep</span>
+        <select class="ctrl-select" id="pages-per-ep">
+          <option value="24">24</option>
+          <option value="32" selected>32</option>
+          <option value="48">48</option>
+        </select>
+      </div>
+      <div class="ctrl-group">
+        <span class="ctrl-label">Panels/page</span>
+        <select class="ctrl-select" id="panels-per-page">
+          <option value="4">4</option>
+          <option value="5" selected>5</option>
+          <option value="6">6</option>
+        </select>
+      </div>
+      <div class="ctrl-group">
+        <span class="ctrl-label">Style</span>
+        <select class="ctrl-select" id="style-select">
+          <option value="action">Action / Fantasy</option>
+          <option value="romance">Romance / Drama</option>
+          <option value="thriller">Thriller / Horror</option>
+          <option value="comedy">Comedy / Slice of Life</option>
+        </select>
+      </div>
+      <button class="pane-btn primary" onclick="convertScript()" style="margin-left:auto;padding:8px 22px;font-size:.8rem">▶ Convert</button>
+    </div>
+
+    <div class="tool-wrap" style="border-radius:0 0 var(--radius) var(--radius);border:1px solid var(--subtle);border-top:none">
+      <div class="tool-pane">
+        <div class="pane-header">
+          <span class="pane-title">Input — Fountain or Final Draft (.fdx)</span>
+          <div class="pane-actions">
+            <label class="pane-btn" style="cursor:pointer" title="Upload .fountain or .fdx file">
+              ↑ Upload
+              <input type="file" id="file-upload" accept=".fountain,.fdx,.pdf,.txt" style="display:none" onchange="handleFileUpload(event)">
+            </label>
+            <button class="pane-btn" onclick="loadSample()">Sample</button>
+            <button class="pane-btn" onclick="clearInput()">Clear</button>
+          </div>
+        </div>
+        <textarea id="screenplay-input" placeholder="Paste your Fountain screenplay here, or click ↑ Upload to load a .fdx Final Draft or .pdf file...
+
+EXT. CASTLE BATTLEMENTS - NIGHT
+
+A storm rolls in over the ancient citadel. KARINEY stands at the edge, wings folded tight, staring down at the city below.
+
+KARINEY
+(to herself)
+They think exile is a punishment.
+
+She turns. The Queen's guard blocks the doorway.
+
+GUARD
+Her Majesty will see you now."></textarea>
+      </div>
+      <div class="tool-pane">
+        <div class="pane-header">
+          <span class="pane-title">Output — Panel Script</span>
+          <span id="conversion-badge" style="font-family:'Inter',system-ui,-apple-system,sans-serif;font-size:.65rem;color:var(--gold);margin-left:auto">3 free conversions left</span>
+          <div class="pane-actions">
+            <button class="pane-btn" id="copy-btn" onclick="copyOutput()">Copy</button>
+            <button class="pane-btn" id="dl-btn" onclick="downloadOutput()">Download .txt</button>
+          </div>
+        </div>
+        <div id="output-area">
+          <p class="placeholder">Your panel script will appear here. Paste a Fountain screenplay and click Convert →</p>
+        </div>
+      </div>
+    </div>
+    <div id="ep-nav-bar" style="display:none;padding:12px 20px;background:var(--surface2);border:1px solid var(--subtle);border-top:none;border-radius:0 0 var(--radius) var(--radius);display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <span class="ctrl-label" style="margin-right:4px">Episodes:</span>
+      <div id="ep-buttons" style="display:flex;gap:6px;flex-wrap:wrap"></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARE -->
+<section id="compare">
+  <div class="container">
+    <div class="section-label">Comparison</div>
+    <h2>Nothing else does this</h2>
+    <p class="section-sub">Every other tool makes you do the hard part yourself. WebtoonForge is the only tool built specifically for screenplay-to-webtoon conversion.</p>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th class="ours">WebtoonForge</th>
+          <th>Final Draft / Fade In</th>
+          <th>Webtoon Creator Tools</th>
+          <th>Generic AI Tools</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="feature-name">Reads Fountain / FDX format</td><td class="ours-col"><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="cross">–</span></td><td><span class="cross">–</span></td></tr>
+        <tr><td class="feature-name">Converts to webtoon panel script</td><td class="ours-col"><span class="check">✓</span></td><td><span class="cross">–</span></td><td><span class="cross">–</span></td><td>Partial</td></tr>
+        <tr><td class="feature-name">Episode auto-splitting</td><td class="ours-col"><span class="check">✓</span></td><td><span class="cross">–</span></td><td><span class="cross">–</span></td><td><span class="cross">–</span></td></tr>
+        <tr><td class="feature-name">Per-panel visual descriptions</td><td class="ours-col"><span class="check">✓</span></td><td><span class="cross">–</span></td><td><span class="cross">–</span></td><td>Inconsistent</td></tr>
+        <tr><td class="feature-name">Shot type assignments</td><td class="ours-col"><span class="check">✓</span></td><td><span class="cross">–</span></td><td><span class="cross">–</span></td><td><span class="cross">–</span></td></tr>
+        <tr><td class="feature-name">Dialogue bubble placement</td><td class="ours-col"><span class="check">✓</span></td><td><span class="cross">–</span></td><td><span class="cross">–</span></td><td><span class="cross">–</span></td></tr>
+        <tr><td class="feature-name">SFX / caption notes</td><td class="ours-col"><span class="check">✓</span></td><td><span class="cross">–</span></td><td><span class="cross">–</span></td><td>Partial</td></tr>
+        <tr><td class="feature-name">Artist-ready output format</td><td class="ours-col"><span class="check">✓</span></td><td><span class="cross">–</span></td><td><span class="cross">–</span></td><td><span class="cross">–</span></td></tr>
+        <tr><td class="feature-name">Built for webtoon creators</td><td class="ours-col"><span class="check">✓</span></td><td><span class="cross">–</span></td><td>Upload only</td><td><span class="cross">–</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="container">
+    <div class="section-label">Pricing</div>
+    <h2>No subscription.<br>Pay only when you convert.</h2>
+    <p class="section-sub">Your first conversion is free. After that it's $1 per conversion — no account, no commitment, no monthly bill.</p>
+
+    <div style="max-width:580px;margin:56px auto 0;text-align:center">
+      <!-- Free tier card -->
+      <div class="plan" style="margin-bottom:24px">
+        <div class="plan-name">Free to start</div>
+        <div class="plan-price">$0</div>
+        <div class="plan-desc">No sign-up required</div>
+        <ul class="plan-features" style="text-align:left">
+          <li>1 free conversion — on us</li>
+          <li>Fountain + Final Draft (.fdx) + PDF import</li>
+          <li>Full multi-episode splitting</li>
+          <li>Per-panel visual descriptions, shot types, SFX</li>
+          <li>Export to .txt</li>
+        </ul>
+        <a href="#tool" class="plan-cta solid" style="display:block;text-align:center;text-decoration:none;padding:13px;border-radius:10px;font-size:.95rem;font-weight:700;background:var(--red);color:#fff">Try it free →</a>
+      </div>
+
+      <!-- Pay per use card -->
+      <div class="plan featured">
+        <div class="plan-badge">After free tier</div>
+        <div class="plan-name">Pay per conversion</div>
+        <div class="plan-price">$1<span> / conversion</span></div>
+        <div class="plan-desc">One-time. No subscription. Ever.</div>
+        <ul class="plan-features" style="text-align:left">
+          <li>Everything in the free tier</li>
+          <li>Each conversion = one full screenplay processed</li>
+          <li>Pay only when you need it</li>
+          <li>No account required</li>
+        </ul>
+        <a href="#tool" class="plan-cta solid" style="display:block;text-align:center;text-decoration:none;padding:13px;border-radius:10px;font-size:.95rem;font-weight:700;background:var(--red);color:#fff">Convert a script →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUPPORT -->
+<section id="support">
+  <div class="container">
+    <div class="section-label">Support</div>
+    <h2>Need help?</h2>
+    <p class="section-sub">Having trouble with a conversion or got a question? Send us a message and we'll get back to you.</p>
+
+    <div style="max-width:560px;margin:48px auto 0">
+      <form id="support-form" action="https://formspree.io/f/xjgpndky" method="POST" onsubmit="handleSupportSubmit(event)">
+        <div style="display:grid;gap:16px">
+          <div>
+            <label style="display:block;font-family:'Inter',system-ui,-apple-system,sans-serif;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Your name</label>
+            <input type="text" name="name" required placeholder="Full name"
+              style="width:100%;background:var(--surface);border:1px solid var(--subtle);color:var(--text);padding:12px 16px;border-radius:10px;font-family:'Inter',system-ui,-apple-system,sans-serif;font-size:.9rem;outline:none;transition:border-color .2s"
+              onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='var(--subtle)'">
+          </div>
+          <div>
+            <label style="display:block;font-family:'Inter',system-ui,-apple-system,sans-serif;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Your email</label>
+            <input type="email" name="email" required placeholder="your@email.com"
+              style="width:100%;background:var(--surface);border:1px solid var(--subtle);color:var(--text);padding:12px 16px;border-radius:10px;font-family:'Inter',system-ui,-apple-system,sans-serif;font-size:.9rem;outline:none;transition:border-color .2s"
+              onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='var(--subtle)'">
+          </div>
+          <div>
+            <label style="display:block;font-family:'Inter',system-ui,-apple-system,sans-serif;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Message</label>
+            <textarea name="message" required placeholder="What do you need help with?" rows="5"
+              style="width:100%;background:var(--surface);border:1px solid var(--subtle);color:var(--text);padding:12px 16px;border-radius:10px;font-family:'Inter',system-ui,-apple-system,sans-serif;font-size:.9rem;outline:none;resize:vertical;transition:border-color .2s"
+              onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='var(--subtle)'"></textarea>
+          </div>
+          <input type="hidden" name="_subject" value="WebtoonForge Support Request">
+          <button type="submit" id="support-submit" class="btn-primary" style="width:100%;padding:14px;font-size:1rem">Send message →</button>
+          <div id="support-msg" style="display:none;text-align:center;font-size:.875rem;padding:12px;border-radius:10px"></div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">Webtoon<span style="color:var(--red)">Forge</span></div>
+  <p style="margin-top:8px">The only tool built to turn feature screenplays into webtoon panel scripts.</p>
+  <p style="margin-top:16px;font-size:.75rem;color:var(--subtle)">© 2025 WebtoonForge. All rights reserved.</p>
+</footer>
+
+<script>
+// ─── Conversion gate (3 free, then $1) ───
+const FREE_LIMIT = 1;
+const STRIPE_PAYMENT_LINK = 'https://buy.stripe.com/8x2bJ2emr8fn3vP7Bvasg00';
+
+function getConversionCount() {
+  return parseInt(localStorage.getItem('wf_conversions') || '0');
+}
+function incrementConversions() {
+  const n = getConversionCount() + 1;
+  localStorage.setItem('wf_conversions', n);
+  return n;
+}
+function updateConversionBadge() {
+  const n = getConversionCount();
+  const remaining = Math.max(0, FREE_LIMIT - n);
+  const badge = document.getElementById('conversion-badge');
+  if (badge) {
+    badge.textContent = remaining > 0 ? `${remaining} free conversion left` : 'Free trial used — $1/conversion';
+    badge.style.color = remaining > 0 ? 'var(--gold)' : 'var(--red)';
+  }
+}
+
+function checkPayGate() {
+  // Check if returning from successful Stripe payment
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('paid') === 'true') {
+    localStorage.setItem('wf_paid_session', '1');
+    history.replaceState({}, '', window.location.pathname);
+  }
+  return getConversionCount() < FREE_LIMIT || localStorage.getItem('wf_paid_session') === '1';
+}
+
+function clearPaidSession() {
+  localStorage.removeItem('wf_paid_session');
+}
+
+// ─── Converter engine ───
+
+const SHOT_TYPES = ['WIDE SHOT','CLOSE-UP','MEDIUM SHOT','OVER-THE-SHOULDER','POV','TWO-SHOT','EXTREME CLOSE-UP','LOW ANGLE'];
+const SFX_MAP = {
+  'punch':'CRACK!', 'hit':'THWACK!', 'door':'SLAM!', 'run':'WHOOSH',
+  'explosion':'BOOM!', 'scream':'SHRIEK!', 'laugh':'HA HA', 'wind':'WHOOOOSH',
+  'sword':'SHING!', 'fall':'THUD!', 'fire':'CRACKLE', 'thunder':'CRASH!',
+  'footstep':'STEP', 'water':'SPLASH!', 'glass':'SHATTER!'
+};
+
+let allEpisodes = [];
+let currentEp = 0;
+let rawOutputText = '';
+
+// ─── Final Draft (.fdx) parser ───
+function parseFDX(xmlText) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(xmlText, 'application/xml');
+  if (doc.querySelector('parsererror')) {
+    throw new Error('Could not parse .fdx file — invalid XML.');
+  }
+
+  const paragraphs = doc.querySelectorAll('Paragraph');
+  const scenes = [];
+  let current = null;
+  let pendingChar = null;
+  let pendingParen = null;
+
+  function getText(el) {
+    return Array.from(el.querySelectorAll('Text')).map(t => t.textContent).join('').trim();
+  }
+
+  for (const para of paragraphs) {
+    const type = para.getAttribute('Type') || '';
+    const text = getText(para);
+    if (!text) continue;
+
+    if (type === 'Scene Heading') {
+      if (current) scenes.push(current);
+      current = { heading: text, action: [], dialogue: [] };
+      pendingChar = null; pendingParen = null;
+    } else if (current) {
+      if (type === 'Action' || type === 'General') {
+        current.action.push(text);
+        pendingChar = null; pendingParen = null;
+      } else if (type === 'Character') {
+        pendingChar = text.replace(/\(.*\)/, '').trim();
+        pendingParen = '';
+      } else if (type === 'Parenthetical') {
+        pendingParen = text;
+      } else if (type === 'Dialogue') {
+        if (pendingChar) {
+          current.dialogue.push({ char: pendingChar, paren: pendingParen || '', text });
+          pendingChar = null; pendingParen = null;
+        }
+      } else if (type === 'Transition') {
+        // ignore
+      }
+    }
+  }
+  if (current) scenes.push(current);
+  return scenes;
+}
+
+// ─── PDF extractor ───
+async function extractPDFText(file) {
+  const arrayBuffer = await file.arrayBuffer();
+  const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+  let fullText = '';
+  for (let i = 1; i <= pdf.numPages; i++) {
+    const page = await pdf.getPage(i);
+    const content = await page.getTextContent();
+    // Reconstruct lines by grouping items with similar Y positions
+    const items = content.items;
+    const lines = {};
+    for (const item of items) {
+      const y = Math.round(item.transform[5]);
+      if (!lines[y]) lines[y] = [];
+      lines[y].push({ x: item.transform[4], text: item.str });
+    }
+    // Sort by Y descending (top of page first), then X
+    const sortedYs = Object.keys(lines).map(Number).sort((a, b) => b - a);
+    for (const y of sortedYs) {
+      const lineItems = lines[y].sort((a, b) => a.x - b.x);
+      const lineText = lineItems.map(i => i.text).join(' ').trim();
+      if (lineText) fullText += lineText + '\n';
+    }
+    fullText += '\n'; // page break
+  }
+  return fullText;
+}
+
+// ─── File upload handler ───
+async function handleFileUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const inputEl = document.getElementById('screenplay-input');
+  const label = document.querySelector('.pane-title');
+  const isPDF = file.name.toLowerCase().endsWith('.pdf');
+  const isFDX = file.name.toLowerCase().endsWith('.fdx');
+
+  if (isPDF) {
+    label.textContent = `Input — ${file.name} (extracting text...)`;
+    try {
+      const text = await extractPDFText(file);
+      inputEl.value = text;
+      inputEl.dataset.format = 'fountain'; // PDF text → treat as Fountain
+      label.textContent = `Input — ${file.name} ✓`;
+    } catch (err) {
+      label.textContent = `Input — PDF error: ${err.message}`;
+      alert('Could not extract text from PDF. Try exporting your screenplay as .fountain or .fdx instead.');
+    }
+  } else {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      inputEl.value = e.target.result;
+      inputEl.dataset.format = isFDX ? 'fdx' : 'fountain';
+      label.textContent = `Input — ${file.name} ✓`;
+    };
+    reader.readAsText(file);
+  }
+  event.target.value = '';
+}
+
+function parseFountain(text) {
+  const lines = text.split('\n');
+  const scenes = [];
+  let current = null;
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].trim();
+    if (!line) continue;
+
+    // Scene heading
+    if (/^(INT\.|EXT\.|INT\/EXT\.|I\/E\.)/.test(line) || /^\./.test(line)) {
+      if (current) scenes.push(current);
+      current = { heading: line.replace(/^\./, ''), action: [], dialogue: [] };
+    } else if (current) {
+      // Check if dialogue (character name followed by dialogue)
+      const nextLine = (lines[i+1] || '').trim();
+      const nextNextLine = (lines[i+2] || '').trim();
+      if (line === line.toUpperCase() && line.length > 1 && !line.startsWith('(') && nextLine) {
+        // Character cue
+        const char = line.replace(/\(.*\)/, '').trim();
+        const paren = nextLine.startsWith('(') ? nextLine : '';
+        const dLine = paren ? (lines[i+2] || '').trim() : nextLine;
+        if (dLine) {
+          current.dialogue.push({ char, paren, text: dLine });
+          i += paren ? 2 : 1;
+        }
+      } else {
+        current.action.push(line);
+      }
+    }
+  }
+  if (current) scenes.push(current);
+  return scenes;
+}
+
+function detectSFX(text) {
+  const lower = text.toLowerCase();
+  for (const [trigger, sfx] of Object.entries(SFX_MAP)) {
+    if (lower.includes(trigger)) return sfx;
+  }
+  return null;
+}
+
+function getShot(i, total) {
+  if (i === 0) return 'WIDE SHOT';
+  if (i === total - 1) return 'CLOSE-UP';
+  return SHOT_TYPES[i % SHOT_TYPES.length];
+}
+
+function sceneToPanels(scene, panelsPerPage) {
+  const panels = [];
+  const actionChunks = [];
+
+  // Split action into chunks for panels
+  const allAction = scene.action.join(' ');
+  const sentences = allAction.match(/[^.!?]+[.!?]*/g) || [allAction];
+
+  // Distribute sentences across panels
+  const baseCount = Math.max(panelsPerPage - scene.dialogue.length, 1);
+  const chunkSize = Math.ceil(sentences.length / baseCount);
+  for (let i = 0; i < sentences.length; i += chunkSize) {
+    actionChunks.push(sentences.slice(i, i + chunkSize).join(' ').trim());
+  }
+
+  // Build panels
+  let panelIdx = 0;
+
+  // Action panels
+  for (let i = 0; i < Math.min(actionChunks.length, panelsPerPage - scene.dialogue.length); i++) {
+    if (!actionChunks[i]) continue;
+    const sfx = detectSFX(actionChunks[i]);
+    panels.push({
+      num: panelIdx + 1,
+      shot: getShot(panelIdx, panelsPerPage),
+      visual: actionChunks[i],
+      dialogue: null,
+      sfx,
+      caption: i === 0 && scene.heading ? extractCaption(scene.heading) : null
+    });
+    panelIdx++;
+  }
+
+  // Dialogue panels
+  for (const d of scene.dialogue) {
+    panels.push({
+      num: panelIdx + 1,
+      shot: panelIdx === 0 ? 'MEDIUM SHOT' : 'OVER-THE-SHOULDER',
+      visual: `${d.char} in frame${d.paren ? ', ' + d.paren.replace(/[()]/g,'') : ''}.`,
+      dialogue: { char: d.char, text: d.text, placement: panelIdx % 2 === 0 ? 'top-left' : 'top-right' },
+      sfx: null,
+      caption: null
+    });
+    panelIdx++;
+  }
+
+  return panels.slice(0, panelsPerPage);
+}
+
+function extractCaption(heading) {
+  const m = heading.match(/^(INT\.|EXT\.|INT\/EXT\.)\s*(.+?)\s*[-–]\s*(.+)$/i);
+  if (m) return `${m[2].trim()} — ${m[3].trim()}`;
+  return null;
+}
+
+function splitIntoEpisodes(scenes, pagesPerEp) {
+  const episodes = [];
+  let ep = [];
+  let pageCount = 0;
+
+  for (const scene of scenes) {
+    ep.push(scene);
+    pageCount++;
+    // Split at act-like moments or when we hit page limit
+    const isNaturalBreak = scene.heading.includes('LATER') || scene.heading.includes('CONT') || pageCount >= pagesPerEp;
+    if (pageCount >= pagesPerEp || (isNaturalBreak && pageCount > pagesPerEp * 0.6)) {
+      episodes.push([...ep]);
+      ep = [];
+      pageCount = 0;
+    }
+  }
+  if (ep.length) episodes.push(ep);
+  return episodes;
+}
+
+function renderPanel(panel) {
+  let html = `<div class="panel-item">
+    <div class="panel-num">PANEL ${panel.num} — ${panel.shot}</div>`;
+  if (panel.caption) html += `<div class="panel-caption">📝 CAPTION: ${panel.caption}</div>`;
+  html += `<div class="panel-visual">${panel.visual}</div>`;
+  if (panel.dialogue) html += `<div class="panel-dialogue">💬 ${panel.dialogue.char} [${panel.dialogue.placement}]: "${panel.dialogue.text}"</div>`;
+  if (panel.sfx) html += `<div class="panel-sfx">SFX: ${panel.sfx}</div>`;
+  html += `</div>`;
+  return html;
+}
+
+function renderEpisode(epScenes, epNum, panelsPerPage) {
+  let html = `<div class="ep-header">Episode ${epNum}</div>`;
+  html += `<div class="ep-meta">// ${epScenes.length} scenes &nbsp;·&nbsp; ~${epScenes.length} pages &nbsp;·&nbsp; ${epScenes.length * panelsPerPage} panels</div>`;
+
+  let pageNum = 1;
+  for (const scene of epScenes) {
+    const panels = sceneToPanels(scene, panelsPerPage);
+    if (!panels.length) continue;
+    html += `<div class="scene-block">`;
+    html += `<div class="scene-slug">PAGE ${pageNum} &nbsp;/&nbsp; ${scene.heading}</div>`;
+    for (const p of panels) html += renderPanel(p);
+    html += `</div>`;
+    pageNum++;
+  }
+  return html;
+}
+
+function episodeToText(epScenes, epNum, panelsPerPage) {
+  let out = `EPISODE ${epNum}\n${'='.repeat(50)}\n\n`;
+  let page = 1;
+  for (const scene of epScenes) {
+    const panels = sceneToPanels(scene, panelsPerPage);
+    if (!panels.length) continue;
+    out += `PAGE ${page}\n${scene.heading}\n${'-'.repeat(40)}\n`;
+    for (const p of panels) {
+      out += `\nPANEL ${p.num} — ${p.shot}\n`;
+      if (p.caption) out += `CAPTION: ${p.caption}\n`;
+      out += `VISUAL: ${p.visual}\n`;
+      if (p.dialogue) out += `DIALOGUE [${p.dialogue.char}, ${p.dialogue.placement}]: "${p.dialogue.text}"\n`;
+      if (p.sfx) out += `SFX: ${p.sfx}\n`;
+    }
+    out += '\n';
+    page++;
+  }
+  return out;
+}
+
+function convertScript() {
+  // Check pay gate
+  if (!checkPayGate()) {
+    const returnUrl = encodeURIComponent(window.location.href + (window.location.search ? '&' : '?') + 'paid=true');
+    const payUrl = STRIPE_PAYMENT_LINK !== 'STRIPE_LINK_PLACEHOLDER'
+      ? `${STRIPE_PAYMENT_LINK}?success_url=${returnUrl}`
+      : '#pricing';
+    document.getElementById('output-area').innerHTML = `
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:48px 24px;text-align:center;gap:20px">
+        <div style="font-size:2rem">⚡</div>
+        <div style="font-family:'Inter',system-ui,-apple-system,sans-serif;font-weight:800;font-size:1.3rem">You've used your free conversion</div>
+        <div style="color:var(--muted);font-size:.9rem;max-width:340px">Each conversion is just $1 — one-time, no subscription.</div>
+        <a href="${payUrl}" style="background:var(--red);color:#fff;padding:14px 36px;border-radius:10px;font-weight:700;font-size:1rem;text-decoration:none;display:inline-block;margin-top:8px">Pay $1 to convert →</a>
+        <div style="color:var(--subtle);font-size:.75rem">Secure checkout via Stripe</div>
+      </div>`;
+    return;
+  }
+
+  const inputEl = document.getElementById('screenplay-input');
+  const input = inputEl.value.trim();
+  if (!input) { alert('Paste a screenplay or upload a .fountain / .fdx file first.'); return; }
+
+  const pagesPerEp = parseInt(document.getElementById('pages-per-ep').value);
+  const panelsPerPage = parseInt(document.getElementById('panels-per-page').value);
+
+  const isFDX = inputEl.dataset.format === 'fdx' || input.startsWith('<?xml') || input.includes('<FinalDraft') || input.includes('<Paragraph Type=');
+
+  let scenes;
+  try {
+    scenes = isFDX ? parseFDX(input) : parseFountain(input);
+  } catch(err) {
+    document.getElementById('output-area').innerHTML = `<p class="placeholder" style="color:var(--red)">Error parsing file: ${err.message}</p>`;
+    return;
+  }
+  if (!scenes.length) {
+    document.getElementById('output-area').innerHTML = '<p class="placeholder">No scene headings found. Make sure your script uses standard Fountain format (INT./EXT. headings).</p>';
+    return;
+  }
+
+  allEpisodes = splitIntoEpisodes(scenes, pagesPerEp);
+  currentEp = 0;
+
+  // Track conversion + clear one-time paid session token
+  incrementConversions();
+  clearPaidSession();
+  updateConversionBadge();
+
+  showEpisode(0, panelsPerPage);
+
+  // Build ep nav
+  const navBar = document.getElementById('ep-nav-bar');
+  const btnContainer = document.getElementById('ep-buttons');
+  navBar.style.display = 'flex';
+  btnContainer.innerHTML = '';
+  allEpisodes.forEach((_, i) => {
+    const b = document.createElement('button');
+    b.textContent = `EP ${i+1}`;
+    b.className = 'ep-nav' + (i === 0 ? ' active' : '');
+    b.style.cssText = 'background:var(--surface);border:1px solid var(--subtle);color:var(--muted);font-size:.72rem;padding:5px 12px;border-radius:6px;cursor:pointer;font-family:Inter,system-ui,sans-serif;transition:all .2s';
+    b.onclick = () => { currentEp = i; showEpisode(i, panelsPerPage); document.querySelectorAll('#ep-buttons button').forEach(x => x.style.borderColor='var(--subtle)'); b.style.borderColor='var(--red)'; b.style.color='var(--text)'; };
+    if (i === 0) { b.style.borderColor='var(--red)'; b.style.color='var(--text)'; }
+    btnContainer.appendChild(b);
+  });
+}
+
+function showEpisode(epIdx, panelsPerPage) {
+  if (!panelsPerPage) panelsPerPage = parseInt(document.getElementById('panels-per-page').value);
+  const ep = allEpisodes[epIdx];
+  document.getElementById('output-area').innerHTML = renderEpisode(ep, epIdx + 1, panelsPerPage);
+  rawOutputText = allEpisodes.map((ep, i) => episodeToText(ep, i+1, panelsPerPage)).join('\n\n');
+}
+
+function copyOutput() {
+  if (!rawOutputText) { alert('Convert a script first.'); return; }
+  navigator.clipboard.writeText(rawOutputText).then(() => {
+    const btn = document.getElementById('copy-btn');
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy', 1500);
+  });
+}
+
+function downloadOutput() {
+  if (!rawOutputText) { alert('Convert a script first.'); return; }
+  const blob = new Blob([rawOutputText], {type:'text/plain'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'webtoon-panel-script.txt';
+  a.click();
+}
+
+function clearInput() {
+  document.getElementById('screenplay-input').value = '';
+  document.getElementById('output-area').innerHTML = '<p class="placeholder">Your panel script will appear here. Paste a Fountain screenplay and click Convert →</p>';
+  document.getElementById('ep-nav-bar').style.display = 'none';
+  allEpisodes = [];
+}
+
+function loadSample() {
+  document.getElementById('screenplay-input').value = `EXT. CASTLE BATTLEMENTS - NIGHT
+
+The storm has reached the walls. Lightning fractures the sky. KARINEY stands at the edge of the parapet, wings folded, jaw set. Below, the city flickers with torchlight.
+
+KARINEY
+(to herself)
+They think exile is a punishment.
+
+She turns. Two QUEEN'S GUARDS block the doorway.
+
+KARINEY
+Stand aside.
+
+The guards don't move. Kariney tilts her head — almost curious — then lunges forward.
+
+INT. THRONE ROOM - CONTINUOUS
+
+Kariney enters, disarming the last guard in a single motion. The QUEEN, HADRIA, does not stand.
+
+QUEEN HADRIA
+You always did prefer the dramatic entrance.
+
+KARINEY
+You're sending Gemmion to Earth. With Cerissa.
+
+QUEEN HADRIA
+My decision is made.
+
+KARINEY
+Gemmion is the only person in this realm who can hold Alawnis together after you're gone. You know that.
+
+The Queen rises. The room is silent.
+
+QUEEN HADRIA
+You are a great soldier, Kariney. But you must learn to reign in your anger. My last orders as Queen will be followed.
+
+EXT. CASTLE GATES - LATER
+
+The gates open. Kariney watches from the battlements. GEMMION and CERISSA emerge into the night below — Cerissa silent as always, Gemmion looking back once.
+
+Kariney does not look away until they are gone.`;
+  convertScript();
+}
+// ─── Support form ───
+async function handleSupportSubmit(e) {
+  e.preventDefault();
+  const form = document.getElementById('support-form');
+  const btn = document.getElementById('support-submit');
+  const msg = document.getElementById('support-msg');
+
+  if (form.action.includes('FORMSPREE_ENDPOINT_PLACEHOLDER')) {
+    msg.style.display = 'block';
+    msg.style.background = 'rgba(255,45,78,.1)';
+    msg.style.color = 'var(--red)';
+    msg.textContent = 'Support form not yet configured. Email us directly at the.production.forge@gmail.com';
+    return;
+  }
+
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    });
+    if (res.ok) {
+      form.reset();
+      msg.style.display = 'block';
+      msg.style.background = 'rgba(74,222,128,.1)';
+      msg.style.color = '#4ade80';
+      msg.textContent = '✓ Message sent! We\'ll get back to you shortly.';
+      btn.textContent = 'Sent!';
+    } else {
+      throw new Error('Failed');
+    }
+  } catch {
+    msg.style.display = 'block';
+    msg.style.background = 'rgba(255,45,78,.1)';
+    msg.style.color = 'var(--red)';
+    msg.textContent = 'Something went wrong. Try again or email us directly.';
+    btn.textContent = 'Send message →';
+    btn.disabled = false;
+  }
+}
+
+// Init on load
+window.addEventListener('DOMContentLoaded', () => {
+  updateConversionBadge();
+  checkPayGate(); // handle ?paid=true redirect
+});
+</script>
+</body>
+</html>
