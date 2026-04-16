@@ -1144,9 +1144,9 @@ function handlePayment(tier){
   if(!raw || parseFloat(raw)<=0){alert('Enter a budget amount first.');return;}
   const returnUrl = encodeURIComponent(window.location.href.split('?')[0]+'?paid=true');
   if(tier === 'topsheet'){
-    window.location.href = STRIPE_TOPSHEET;
+    window.location.href = STRIPE_TOPSHEET + "?success_url=" + returnUrl;
   } else {
-    window.location.href = STRIPE_BUDGET;
+    window.location.href = STRIPE_BUDGET + "?success_url=" + returnUrl;
   }
 }
 
@@ -3247,9 +3247,9 @@ function handlePayment(tier){
   if(!raw || parseFloat(raw)<=0){alert('Enter a budget amount first.');return;}
   const returnUrl = encodeURIComponent(window.location.href.split('?')[0]+'?paid=true');
   if(tier === 'topsheet'){
-    window.location.href = STRIPE_TOPSHEET;
+    window.location.href = STRIPE_TOPSHEET + "?success_url=" + returnUrl;
   } else {
-    window.location.href = STRIPE_BUDGET;
+    window.location.href = STRIPE_BUDGET + "?success_url=" + returnUrl;
   }
 }
 
